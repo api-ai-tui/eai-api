@@ -33,7 +33,8 @@
           "description" : "type of query made. Options are one-way or retour (retour is default)",
           "required" : true,
           "schema" : {
-            "type" : "string"
+            "type" : "string",
+            "enum" : [ "one-way", "retour" ]
           }
         }, {
           "in" : "query",
