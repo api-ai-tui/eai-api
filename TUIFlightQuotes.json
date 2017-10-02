@@ -291,8 +291,16 @@
           "quoteItem" : {
             "type" : "object",
             "properties" : {
+              "flightBasePrice" : {
+                "type" : "object",
+                "$ref" : "#/components/schemas/Money"
+              },
               "seatsAvailable" : {
                 "type" : "integer"
+              },
+              "seatsAvailableAtThisPrice" : {
+                "type" : "integer",
+                "minimum" : 0
               }
             }
           }
