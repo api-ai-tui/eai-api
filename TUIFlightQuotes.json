@@ -220,136 +220,12 @@
             "content" : {
               "application/xml" : {
                 "schema" : {
-                  "type" : "object",
-                  "items" : null,
+                  "type" : "array",
                   "xml" : {
-                    "name" : "TUIFlightResponse"
+                    "name" : "TUIFlightQuotes"
                   },
-                  "properties" : {
-                    "resultSet" : {
-                      "type" : "object",
-                      "xml" : {
-                        "name" : "resultSet"
-                      },
-                      "properties" : {
-                        "totalResults" : {
-                          "type" : "integer",
-                          "example" : 1
-                        },
-                        "offset" : {
-                          "type" : "integer",
-                          "example" : 1
-                        },
-                        "limit" : {
-                          "type" : "integer",
-                          "example" : 100
-                        },
-                        "nextOffsetLink" : {
-                          "type" : "string",
-                          "example" : "https://tui.com/api/Flight/offset/blablabla"
-                        }
-                      }
-                    },
-                    "flightResult" : {
-                      "type" : "object",
-                      "xml" : {
-                        "name" : "flightResult"
-                      },
-                      "properties" : {
-                        "outFlight" : {
-                          "type" : "object",
-                          "xml" : {
-                            "name" : "outFlight"
-                          },
-                          "properties" : {
-                            "productID" : {
-                              "type" : "string",
-                              "example" : "Tussy-5693784243"
-                            },
-                            "scheduleEntryID" : {
-                              "type" : "string"
-                            },
-                            "departureAirportID" : {
-                              "type" : "string",
-                              "example" : "AMS"
-                            },
-                            "arrivalAirportID" : {
-                              "type" : "string",
-                              "example" : "LPA"
-                            },
-                            "arrivalTime" : {
-                              "type" : "string"
-                            },
-                            "totalPriceFrom" : {
-                              "type" : "object",
-                              "xml" : {
-                                "name" : "totalPriceFrom"
-                              },
-                              "properties" : {
-                                "moneyvalue" : {
-                                  "type" : "integer",
-                                  "example" : 99.0
-                                },
-                                "currency" : {
-                                  "type" : "string",
-                                  "example" : "eur"
-                                }
-                              }
-                            },
-                            "flightNumber" : {
-                              "type" : "string",
-                              "example" : "TF-987"
-                            }
-                          }
-                        },
-                        "returnFlight" : {
-                          "type" : "object",
-                          "xml" : {
-                            "name" : "returnFlight"
-                          },
-                          "properties" : {
-                            "productID" : {
-                              "type" : "string",
-                              "example" : "Tussy-2983501273"
-                            },
-                            "scheduleEntryID" : {
-                              "type" : "string"
-                            },
-                            "departureAirportID" : {
-                              "type" : "string",
-                              "example" : "LPA"
-                            },
-                            "arrivalAirportID" : {
-                              "type" : "string",
-                              "example" : "AMS"
-                            },
-                            "arrivalTime" : {
-                              "type" : "string"
-                            },
-                            "totalPriceFrom" : {
-                              "type" : "object",
-                              "xml" : {
-                                "name" : "totalPriceFrom"
-                              },
-                              "properties" : {
-                                "moneyvalue" : {
-                                  "type" : "integer",
-                                  "example" : 109.0
-                                },
-                                "currency" : {
-                                  "type" : "string",
-                                  "example" : "eur"
-                                }
-                              }
-                            },
-                            "flightNumber" : {
-                              "type" : "string",
-                              "example" : "TF-123"
-                            }
-                          }
-                        }
-                      }
-                    }
+                  "items" : {
+                    "$ref" : "#/components/schemas/TUIFlightQuote"
                   }
                 }
               }
@@ -364,17 +240,13 @@
   },
   "components" : {
     "schemas" : {
-      "TUIFlights" : {
+      "TUIFlightQuotes" : {
         "type" : "array",
-        "xml" : {
-          "name" : "test"
-        },
         "items" : {
-          "wrapped" : true,
-          "$ref" : "#/components/schemas/TUIFlight"
+          "$ref" : "#/components/schemas/TUIFlightQuote"
         }
       },
-      "TUIFlight" : {
+      "TUIFlightQuote" : {
         "type" : "object",
         "xml" : {
           "name" : "TUIFlight"
@@ -394,72 +266,19 @@
           }
         }
       },
-      "ResultSet" : {
-        "xml" : {
-          "name" : "ResultSet"
-        },
+      "Money" : {
         "type" : "object",
-        "required" : [ "totalResults", "offset", "limit", "nextOffsetLink" ],
+        "xml" : {
+          "name" : "money"
+        },
         "properties" : {
-          "totalResults" : {
+          "moneyvalue" : {
             "type" : "integer",
-            "example" : 1
+            "example" : "109,90"
           },
-          "offset" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "limit" : {
-            "type" : "integer",
-            "example" : 50
-          },
-          "nextOffsetLink" : {
+          "currency" : {
             "type" : "string",
-            "format" : "url",
-            "example" : "https://www.tui.com/api/blablabla"
-          }
-        }
-      },
-      "FlightResult" : {
-        "xml" : {
-          "name" : "FlightResult"
-        },
-        "type" : "object",
-        "required" : [ "outFlight" ],
-        "properties" : {
-          "outFlight" : {
-            "type" : "object",
-            "properties" : {
-              "productID" : {
-                "type" : "string",
-                "example" : "ABC"
-              },
-              "departureAirportID" : {
-                "type" : "string",
-                "example" : "AMS"
-              },
-              "arrivalAirportID" : {
-                "type" : "string",
-                "example" : "LPA"
-              }
-            }
-          },
-          "returnFlight" : {
-            "type" : "object",
-            "properties" : {
-              "productID" : {
-                "type" : "string",
-                "example" : "ABC"
-              },
-              "departureAirportID" : {
-                "type" : "string",
-                "example" : "LPA"
-              },
-              "arrivalAirportID" : {
-                "type" : "string",
-                "example" : "AMS"
-              }
-            }
+            "example" : "EUR"
           }
         }
       }
