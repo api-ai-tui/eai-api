@@ -218,6 +218,11 @@
           "200" : {
             "description" : "search results matching criteria",
             "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TUIFlightQuotes"
+                }
+              },
               "application/xml" : {
                 "schema" : {
                   "type" : "object",
@@ -225,9 +230,9 @@
                     "name" : "TUIFlightQuotes"
                   },
                   "properties" : {
-                    "type" : "array",
-                    "items" : {
-                      "$ref" : "#/components/schemas/TUIFlightQuote"
+                    "TUIFlightQuote" : {
+                      "type" : "array",
+                      "$ref" : "#/components/schemas/TUIFlightQuotes"
                     }
                   }
                 }
@@ -252,20 +257,12 @@
       "TUIFlightQuote" : {
         "type" : "object",
         "xml" : {
-          "name" : "TUIFlight"
+          "name" : "TUIFlightQuote"
         },
         "properties" : {
-          "productID" : {
+          "flightQuoteID" : {
             "type" : "string",
-            "example" : "ABC"
-          },
-          "departureAirportID" : {
-            "type" : "string",
-            "example" : "AMS"
-          },
-          "arrivalAirportID" : {
-            "type" : "string",
-            "example" : "LPA"
+            "example" : 59402367891438907856
           }
         }
       },
