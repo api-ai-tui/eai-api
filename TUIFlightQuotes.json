@@ -267,7 +267,7 @@
           },
           "flightDirection" : {
             "type" : "string",
-            "$ref" : "#/components/schemas/FlightDirection"
+            "enum" : [ "outbound", "inbound" ]
           },
           "TUIFlight" : {
             "type" : "object",
@@ -301,16 +301,28 @@
               "seatsAvailableAtThisPrice" : {
                 "type" : "integer",
                 "minimum" : 0
+              },
+              "paxAssignmentType" : {
+                "type" : "string",
+                "enum" : [ "Child", "Adult", "Infant" ]
+              },
+              "paxBirthdayDates" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "object",
+                  "properties" : {
+                    "paxBirthdayDate" : {
+                      "type" : "object",
+                      "properties" : {
+                        "birthday" : {
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
-          }
-        }
-      },
-      "FlightDirection" : {
-        "properties" : {
-          "direction" : {
-            "type" : "string",
-            "enum" : [ "outbound", "inbound" ]
           }
         }
       },
