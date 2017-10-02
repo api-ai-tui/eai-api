@@ -1,0 +1,468 @@
+{
+  "openapi" : "3.0.0",
+  "servers" : [ ],
+  "info" : {
+    "description" : "Returns available TUIFlightQuotes given the search/filer criteria provided.",
+    "version" : "0.1",
+    "title" : "TUIFlightQuotes API",
+    "contact" : {
+      "email" : "integration@tui.nl"
+    },
+    "license" : {
+      "name" : "TO DO",
+      "url" : "http://www.todo.org/licenses"
+    }
+  },
+  "tags" : [ {
+    "name" : "admins",
+    "description" : "Secured Admin-only calls"
+  }, {
+    "name" : "developers",
+    "description" : "Operations available to regular developers"
+  } ],
+  "paths" : {
+    "/TUIFlightQuotes" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "summary" : "searches TUIFlightQuotes",
+        "operationId" : "searchTUIFlightQuotes",
+        "description" : "By passing in the appropriate options, you can search for\navailable TUIFlightQuotes in the system\n",
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "queryType",
+          "description" : "type of query made. Options are one-way or retour (retour is default)",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "originAirport",
+          "description" : "IATA code of the origin airport (single or multiple; comma delimited)",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "destinationAirport",
+          "description" : "IATA code of the destination airport (single or multiple; comma delimited)",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "originDepartureDatePeriodFrom",
+          "description" : "Date range departing from origin airport [From date]",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }, {
+          "in" : "query",
+          "name" : "originDepartureDatePeriodTo",
+          "description" : "Date range departing from origin airport [To date]",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }, {
+          "in" : "query",
+          "name" : "originArrivalDatePeriodFrom",
+          "description" : "Date range arriving at the origin airport [From date]",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }, {
+          "in" : "query",
+          "name" : "originArrivalDatePeriodTo",
+          "description" : "Date range arriving at the origin airport [To date]",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }, {
+          "in" : "query",
+          "name" : "destinationDepartureDatePeriodFrom",
+          "description" : "Date range departing from destination airport [From date]",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }, {
+          "in" : "query",
+          "name" : "destinationDepartureDatePeriodTo",
+          "description" : "Date range departing from destination airport [To date]",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }, {
+          "in" : "query",
+          "name" : "destinationArrivalDatePeriodFrom",
+          "description" : "Date range arriving at the destination airport [From date]",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }, {
+          "in" : "query",
+          "name" : "destinationArrivalDatePeriodTo",
+          "description" : "Date range arriving at the destination airport [To date]",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }, {
+          "in" : "query",
+          "name" : "originDepartureTimeRangeFrom",
+          "description" : "Time range departing from origin airport [From time]",
+          "schema" : {
+            "type" : "string",
+            "format" : "time"
+          }
+        }, {
+          "in" : "query",
+          "name" : "originDepartureTimeRangeTo",
+          "description" : "Time range departing from origin airport [To time]",
+          "schema" : {
+            "type" : "string",
+            "format" : "time"
+          }
+        }, {
+          "in" : "query",
+          "name" : "originArrivalTimeRangeFrom",
+          "description" : "Time range arriving at the origin airport [From time]",
+          "schema" : {
+            "type" : "string",
+            "format" : "time"
+          }
+        }, {
+          "in" : "query",
+          "name" : "originArrivalTimeRangeTo",
+          "description" : "Time range arriving at the origin airport [To time]",
+          "schema" : {
+            "type" : "string",
+            "format" : "time"
+          }
+        }, {
+          "in" : "query",
+          "name" : "destinationDepartureTimeRangeFrom",
+          "description" : "Time range departing from destination airport [From time]",
+          "schema" : {
+            "type" : "string",
+            "format" : "time"
+          }
+        }, {
+          "in" : "query",
+          "name" : "destinationDepartureTimeRangeTo",
+          "description" : "Time range departing from destination airport [To time]",
+          "schema" : {
+            "type" : "string",
+            "format" : "time"
+          }
+        }, {
+          "in" : "query",
+          "name" : "destinationArrivalTimeRangeFrom",
+          "description" : "Time range arriving at the destination airport [From time]",
+          "schema" : {
+            "type" : "string",
+            "format" : "time"
+          }
+        }, {
+          "in" : "query",
+          "name" : "destinationArrivalTimeRangeTo",
+          "description" : "Time range arriving at the destination airport [To time]",
+          "schema" : {
+            "type" : "string",
+            "format" : "time"
+          }
+        }, {
+          "in" : "query",
+          "name" : "daysAtDestination",
+          "description" : "Duration in days of the time spent on the destination. Return on the same day means 1 day at destination.",
+          "schema" : {
+            "type" : "integer",
+            "minimum" : 1
+          }
+        }, {
+          "in" : "query",
+          "name" : "directFlight",
+          "description" : "When set to true, will only return direct flights",
+          "schema" : {
+            "type" : "integer",
+            "minimum" : 0
+          }
+        }, {
+          "in" : "query",
+          "name" : "paxBirthDate",
+          "description" : "Birthdate of each participant, when not provided will return result for one adult.",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }, {
+          "in" : "query",
+          "name" : "limit",
+          "description" : "Maximum number of items in the response",
+          "schema" : {
+            "type" : "integer",
+            "minimum" : 0,
+            "maximum" : 1000,
+            "default" : 100
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "search results matching criteria",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "items" : null,
+                  "xml" : {
+                    "name" : "TUIFlightResponse"
+                  },
+                  "properties" : {
+                    "resultSet" : {
+                      "type" : "object",
+                      "xml" : {
+                        "name" : "resultSet"
+                      },
+                      "properties" : {
+                        "totalResults" : {
+                          "type" : "integer",
+                          "example" : 1
+                        },
+                        "offset" : {
+                          "type" : "integer",
+                          "example" : 1
+                        },
+                        "limit" : {
+                          "type" : "integer",
+                          "example" : 100
+                        },
+                        "nextOffsetLink" : {
+                          "type" : "string",
+                          "example" : "https://tui.com/api/Flight/offset/blablabla"
+                        }
+                      }
+                    },
+                    "flightResult" : {
+                      "type" : "object",
+                      "xml" : {
+                        "name" : "flightResult"
+                      },
+                      "properties" : {
+                        "outFlight" : {
+                          "type" : "object",
+                          "xml" : {
+                            "name" : "outFlight"
+                          },
+                          "properties" : {
+                            "productID" : {
+                              "type" : "string",
+                              "example" : "Tussy-5693784243"
+                            },
+                            "scheduleEntryID" : {
+                              "type" : "string"
+                            },
+                            "departureAirportID" : {
+                              "type" : "string",
+                              "example" : "AMS"
+                            },
+                            "arrivalAirportID" : {
+                              "type" : "string",
+                              "example" : "LPA"
+                            },
+                            "arrivalTime" : {
+                              "type" : "string"
+                            },
+                            "totalPriceFrom" : {
+                              "type" : "object",
+                              "xml" : {
+                                "name" : "totalPriceFrom"
+                              },
+                              "properties" : {
+                                "moneyvalue" : {
+                                  "type" : "integer",
+                                  "example" : 99.0
+                                },
+                                "currency" : {
+                                  "type" : "string",
+                                  "example" : "eur"
+                                }
+                              }
+                            },
+                            "flightNumber" : {
+                              "type" : "string",
+                              "example" : "TF-987"
+                            }
+                          }
+                        },
+                        "returnFlight" : {
+                          "type" : "object",
+                          "xml" : {
+                            "name" : "returnFlight"
+                          },
+                          "properties" : {
+                            "productID" : {
+                              "type" : "string",
+                              "example" : "Tussy-2983501273"
+                            },
+                            "scheduleEntryID" : {
+                              "type" : "string"
+                            },
+                            "departureAirportID" : {
+                              "type" : "string",
+                              "example" : "LPA"
+                            },
+                            "arrivalAirportID" : {
+                              "type" : "string",
+                              "example" : "AMS"
+                            },
+                            "arrivalTime" : {
+                              "type" : "string"
+                            },
+                            "totalPriceFrom" : {
+                              "type" : "object",
+                              "xml" : {
+                                "name" : "totalPriceFrom"
+                              },
+                              "properties" : {
+                                "moneyvalue" : {
+                                  "type" : "integer",
+                                  "example" : 109.0
+                                },
+                                "currency" : {
+                                  "type" : "string",
+                                  "example" : "eur"
+                                }
+                              }
+                            },
+                            "flightNumber" : {
+                              "type" : "string",
+                              "example" : "TF-123"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "TUIFlights" : {
+        "type" : "array",
+        "xml" : {
+          "name" : "test"
+        },
+        "items" : {
+          "wrapped" : true,
+          "$ref" : "#/components/schemas/TUIFlight"
+        }
+      },
+      "TUIFlight" : {
+        "type" : "object",
+        "xml" : {
+          "name" : "TUIFlight"
+        },
+        "properties" : {
+          "productID" : {
+            "type" : "string",
+            "example" : "ABC"
+          },
+          "departureAirportID" : {
+            "type" : "string",
+            "example" : "AMS"
+          },
+          "arrivalAirportID" : {
+            "type" : "string",
+            "example" : "LPA"
+          }
+        }
+      },
+      "ResultSet" : {
+        "xml" : {
+          "name" : "ResultSet"
+        },
+        "type" : "object",
+        "required" : [ "totalResults", "offset", "limit", "nextOffsetLink" ],
+        "properties" : {
+          "totalResults" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "offset" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "limit" : {
+            "type" : "integer",
+            "example" : 50
+          },
+          "nextOffsetLink" : {
+            "type" : "string",
+            "format" : "url",
+            "example" : "https://www.tui.com/api/blablabla"
+          }
+        }
+      },
+      "FlightResult" : {
+        "xml" : {
+          "name" : "FlightResult"
+        },
+        "type" : "object",
+        "required" : [ "outFlight" ],
+        "properties" : {
+          "outFlight" : {
+            "type" : "object",
+            "properties" : {
+              "productID" : {
+                "type" : "string",
+                "example" : "ABC"
+              },
+              "departureAirportID" : {
+                "type" : "string",
+                "example" : "AMS"
+              },
+              "arrivalAirportID" : {
+                "type" : "string",
+                "example" : "LPA"
+              }
+            }
+          },
+          "returnFlight" : {
+            "type" : "object",
+            "properties" : {
+              "productID" : {
+                "type" : "string",
+                "example" : "ABC"
+              },
+              "departureAirportID" : {
+                "type" : "string",
+                "example" : "LPA"
+              },
+              "arrivalAirportID" : {
+                "type" : "string",
+                "example" : "AMS"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
