@@ -263,6 +263,62 @@
           "flightQuoteID" : {
             "type" : "string",
             "example" : 59402367891438907856
+          },
+          "flightDirection" : {
+            "type" : "string",
+            "$ref" : "#/components/schemas/FlightDirection"
+          },
+          "TUIFlight" : {
+            "type" : "object",
+            "$ref" : "#/components/schemas/TUIFlight"
+          }
+        }
+      },
+      "FlightDirection" : {
+        "properties" : {
+          "direction" : {
+            "enum" : [ "outbound", "inbound" ]
+          }
+        }
+      },
+      "TUIFlight" : {
+        "type" : "object",
+        "xml" : {
+          "name" : "TUIFlight"
+        },
+        "properties" : {
+          "productID" : {
+            "type" : "string",
+            "example" : "Tussy-1234567890"
+          },
+          "scheduleEntryID" : {
+            "type" : "string"
+          },
+          "departureAirportCode" : {
+            "type" : "string",
+            "example" : "BRU"
+          },
+          "departureTime" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-05-31T15:59+02:00"
+          },
+          "arrivalAirportCode" : {
+            "type" : "string",
+            "example" : "POP"
+          },
+          "arrivalTime" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-05-31T21:35-04:00"
+          },
+          "carrierCode" : {
+            "type" : "string",
+            "example" : "OR"
+          },
+          "flightNumber" : {
+            "type" : "string",
+            "example" : "OR302"
           }
         }
       },
