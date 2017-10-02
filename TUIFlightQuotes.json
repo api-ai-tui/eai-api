@@ -220,12 +220,15 @@
             "content" : {
               "application/xml" : {
                 "schema" : {
-                  "type" : "array",
+                  "type" : "object",
                   "xml" : {
                     "name" : "TUIFlightQuotes"
                   },
-                  "items" : {
-                    "$ref" : "#/components/schemas/TUIFlightQuote"
+                  "properties" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/components/schemas/TUIFlightQuote"
+                    }
                   }
                 }
               }
