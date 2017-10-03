@@ -13,13 +13,6 @@
       "url" : "http://www.todo.org/licenses"
     }
   },
-  "tags" : [ {
-    "name" : "admins",
-    "description" : "Secured Admin-only calls"
-  }, {
-    "name" : "developers",
-    "description" : "Operations available to regular developers"
-  } ],
   "paths" : {
     "/TUIFlightQuotes" : {
       "get" : {
