@@ -6,6 +6,7 @@
     "version" : "0.1",
     "title" : "TUIFlightQuotes API",
     "contact" : {
+      "name" : "Product Team Integration",
       "email" : "integration@tui.nl"
     },
     "license" : {
@@ -16,7 +17,6 @@
   "paths" : {
     "/TUIFlightQuotes" : {
       "get" : {
-        "tags" : [ "developers" ],
         "summary" : "searches TUIFlightQuotes",
         "operationId" : "searchTUIFlightQuotes",
         "description" : "By passing in the appropriate options, you can search for\navailable TUIFlightQuotes in the system\n",
@@ -24,24 +24,21 @@
           "in" : "query",
           "name" : "queryType",
           "description" : "type of query made. Options are one-way or retour (retour is default)",
-          "required" : true,
           "schema" : {
             "type" : "string",
             "enum" : [ "one-way", "retour" ]
           }
         }, {
           "in" : "query",
-          "name" : "originAirport",
+          "name" : "originAirportCode",
           "description" : "IATA code of the origin airport (single or multiple; comma delimited)",
-          "required" : false,
           "schema" : {
             "type" : "string"
           }
         }, {
           "in" : "query",
-          "name" : "destinationAirport",
+          "name" : "destinationAirportCode",
           "description" : "IATA code of the destination airport (single or multiple; comma delimited)",
-          "required" : false,
           "schema" : {
             "type" : "string"
           }
@@ -186,7 +183,7 @@
           "name" : "paxBirthDate",
           "description" : "Birthdate of each participant, when not provided will return result for one adult.",
           "schema" : {
-            "type" : "string",
+            "type" : "array",
             "format" : "date"
           }
         }, {
@@ -204,11 +201,6 @@
           "200" : {
             "description" : "search results matching criteria",
             "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/TUIFlightQuotes"
-                }
-              },
               "application/xml" : {
                 "schema" : {
                   "type" : "object",
