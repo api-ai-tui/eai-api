@@ -10,13 +10,6 @@
       "email" : "integration@tui.nl"
     }
   },
-  "tags" : [ {
-    "name" : "admins",
-    "description" : "Secured Admin-only calls"
-  }, {
-    "name" : "developers",
-    "description" : "Operations available to regular developers"
-  } ],
   "paths" : {
     "/TUIFlightSchedules" : {
       "get" : {
