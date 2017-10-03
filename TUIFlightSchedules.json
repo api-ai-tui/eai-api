@@ -287,6 +287,11 @@
           "flightNumber" : {
             "type" : "string",
             "example" : "OR302"
+          },
+          "numberOfStops" : {
+            "type" : "integer",
+            "minimum" : 0,
+            "example" : 1
           }
         }
       },
