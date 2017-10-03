@@ -183,14 +183,6 @@
           }
         }, {
           "in" : "query",
-          "name" : "directFlight",
-          "description" : "When set to true, will only return direct flights",
-          "schema" : {
-            "type" : "integer",
-            "minimum" : 0
-          }
-        }, {
-          "in" : "query",
           "name" : "paxBirthDate",
           "description" : "Birthdate of each participant, when not provided will return result for one adult.",
           "schema" : {
@@ -260,7 +252,7 @@
           },
           "flightDirection" : {
             "type" : "string",
-            "enum" : [ "outbound", "inbound" ]
+            "enum" : [ "out", "return" ]
           },
           "TUIFlight" : {
             "type" : "object",
@@ -357,6 +349,10 @@
           "flightNumber" : {
             "type" : "string",
             "example" : "OR302"
+          },
+          "numberOfStops" : {
+            "type" : "integer",
+            "example" : 1
           }
         }
       },
