@@ -10,13 +10,6 @@
       "email" : "integration@tui.nl"
     }
   },
-  "tags" : [ {
-    "name" : "admins",
-    "description" : "Secured Admin-only calls"
-  }, {
-    "name" : "developers",
-    "description" : "Operations available to regular developers"
-  } ],
   "paths" : {
     "/TUIAirports" : {
       "get" : {
@@ -60,11 +53,6 @@
           "200" : {
             "description" : "return results matching criteria",
             "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/TUIAirports"
-                }
-              },
               "application/xml" : {
                 "schema" : {
                   "type" : "object",
@@ -109,16 +97,20 @@
           },
           "geoLocation" : {
             "type" : "object",
-            "properties" : {
-              "lat" : {
-                "type" : "integer",
-                "example" : "50,9013889"
-              },
-              "lng" : {
-                "type" : "integer",
-                "example" : "004,4844444"
-              }
-            }
+            "$ref" : "#/components/schemas/GeoLocation"
+          }
+        }
+      },
+      "GeoLocation" : {
+        "type" : "object",
+        "properties" : {
+          "lat" : {
+            "type" : "integer",
+            "example" : "50,9013889"
+          },
+          "lng" : {
+            "type" : "integer",
+            "example" : "004,4844444"
           }
         }
       }
