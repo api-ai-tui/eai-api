@@ -8,10 +8,6 @@
     "contact" : {
       "name" : "Product Team Integration",
       "email" : "integration@tui.nl"
-    },
-    "license" : {
-      "name" : "TO DO",
-      "url" : "http://www.todo.org/licenses"
     }
   },
   "paths" : {
@@ -268,30 +264,29 @@
           "quoteItem" : {
             "type" : "object",
             "properties" : {
-              "flightBasePrice" : {
-                "type" : "object",
-                "$ref" : "#/components/schemas/Money"
+              "paxAssignmentType" : {
+                "type" : "string",
+                "enum" : [ "Adult", "Child", "Infant" ]
               },
               "seatsAvailable" : {
                 "type" : "integer"
               },
-              "seatsAvailableAtThisPrice" : {
-                "type" : "integer",
-                "minimum" : 0
+              "componentUnitTypeID" : {
+                "type" : "string"
               },
-              "paxAssignmentType" : {
-                "type" : "string",
-                "enum" : [ "Child", "Adult", "Infant" ]
+              "flightBasePrice" : {
+                "type" : "object",
+                "$ref" : "#/components/schemas/Money"
               },
-              "paxBirthdayDates" : {
+              "paxBirthDates" : {
                 "type" : "array",
                 "items" : {
                   "type" : "object",
                   "properties" : {
-                    "paxBirthdayDate" : {
+                    "paxBirthDate" : {
                       "type" : "object",
                       "properties" : {
-                        "birthday" : {
+                        "birthDate" : {
                           "type" : "string"
                         }
                       }
