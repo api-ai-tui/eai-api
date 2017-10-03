@@ -138,6 +138,9 @@
                                   },
                                   "flightNumber" : {
                                     "type" : "string"
+                                  },
+                                  "numberOfStops" : {
+                                    "type" : "integer"
                                   }
                                 }
                               },
@@ -148,7 +151,8 @@
                                 "arrivalAirportCode" : "TFS",
                                 "arrivalTime" : "2019-04-17T12:30+01:00",
                                 "carrierCode" : "OR",
-                                "flightNumber" : "OR302"
+                                "flightNumber" : "OR302",
+                                "numberOfStops" : 0
                               }, {
                                 "productID" : "Tussy-1234567894",
                                 "departureAirportCode" : "AMS",
@@ -156,7 +160,8 @@
                                 "arrivalAirportCode" : "TFS",
                                 "arrivalTime" : "2019-04-17T22:30+01:00",
                                 "carrierCode" : "OR",
-                                "flightNumber" : "OR304"
+                                "flightNumber" : "OR304",
+                                "numberOfStops" : 0
                               } ]
                             }
                           }
