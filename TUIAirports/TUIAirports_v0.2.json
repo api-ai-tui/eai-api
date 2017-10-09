@@ -194,7 +194,7 @@
             }
           },
           "400 " : {
-            "description" : "Bad Request"
+            "description" : "Bad Requests"
           },
           "401 " : {
             "description" : "Unauthorized"
