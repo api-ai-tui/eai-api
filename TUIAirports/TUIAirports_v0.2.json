@@ -61,28 +61,16 @@
             "description" : "Every REST-call has default response Headers",
             "headers" : {
               "X-TUI-EAI-Limit" : {
-                "description" : "Maximum number of responses in list. Equal to the query parameter, if provided",
-                "schema" : {
-                  "type" : "integer"
-                }
+                "$ref" : "#/components/headers/X-TUI-EAI-Limit"
               },
               "X-TUI-EAI-NextOffsetLink" : {
-                "description" : "Link to the next Offset of response objects",
-                "schema" : {
-                  "type" : "string"
-                }
+                "$ref" : "#/components/headers/X-TUI-EAI-NextOffsetLink"
               },
               "X-TUI-EAI-Offset" : {
-                "description" : "The current Offset",
-                "schema" : {
-                  "type" : "integer"
-                }
+                "$ref" : "#/components/headers/X-TUI-EAI-Offset"
               },
               "X-TUI-EAI-TotalResults" : {
-                "description" : "Total results",
-                "schema" : {
-                  "type" : "integer"
-                }
+                "$ref" : "#/components/headers/X-TUI-EAI-TotalResults"
               }
             }
           },
@@ -219,6 +207,32 @@
     }
   },
   "components" : {
+    "headers" : {
+      "X-TUI-EAI-Limit" : {
+        "description" : "Maximum number of responses in list. Equals to the query parameter",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "X-TUI-EAI-NextOffsetLink" : {
+        "description" : "Link to the next Offset of response objects",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "X-TUI-EAI-Offset" : {
+        "description" : "The current Offset",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "X-TUI-EAI-TotalResults" : {
+        "description" : "Total results",
+        "schema" : {
+          "type" : "integer"
+        }
+      }
+    },
     "schemas" : {
       "TUIAirports" : {
         "type" : "array",
