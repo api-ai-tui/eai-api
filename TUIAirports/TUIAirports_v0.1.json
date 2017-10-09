@@ -1,0 +1,119 @@
+{
+  "openapi" : "3.0.0",
+  "servers" : [ ],
+  "info" : {
+    "description" : "This API describes endpoints encapsulating the business object TUIAirport(s).",
+    "version" : "0.1",
+    "title" : "TUIAirport API",
+    "contact" : {
+      "name" : "ProductTeam Integration",
+      "email" : "integration@tui.nl"
+    }
+  },
+  "paths" : {
+    "/v0.1/TUIAirports" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "summary" : "returns a list of TUIAirport objects given the search/filer criteria provided",
+        "operationId" : "returnTUIAirportList",
+        "description" : "TO DO",
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "CountryCode",
+          "description" : "Country code where the requested airport(s) is located (single or multiple; comma delimited)",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "maxDistanceFrom",
+          "description" : "Coordinates to calculate maximum distance to airport (default is all airports)",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "maxDistance",
+          "description" : "Only return airports closer than provided distance (in km). Default = 100",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "in" : "query",
+          "name" : "limit",
+          "description" : "Maximum number of items in the response",
+          "schema" : {
+            "type" : "integer",
+            "minimum" : 1,
+            "maximum" : 1000,
+            "default" : 100
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "return results matching criteria",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "xml" : {
+                    "name" : "TUIAirports"
+                  },
+                  "properties" : {
+                    "TUIAirport" : {
+                      "type" : "array",
+                      "$ref" : "#/components/schemas/TUIAirports"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "TUIAirports" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/TUIAirport"
+        }
+      },
+      "TUIAirport" : {
+        "type" : "object",
+        "properties" : {
+          "countryID" : {
+            "type" : "string",
+            "example" : "BE"
+          },
+          "IATAAirportCode" : {
+            "type" : "string",
+            "example" : "BRU"
+          },
+          "geoLocation" : {
+            "type" : "object",
+            "$ref" : "#/components/schemas/GeoLocation"
+          }
+        }
+      },
+      "GeoLocation" : {
+        "type" : "object",
+        "properties" : {
+          "lat" : {
+            "type" : "integer",
+            "example" : "50,9013889"
+          },
+          "lng" : {
+            "type" : "integer",
+            "example" : "004,4844444"
+          }
+        }
+      }
+    }
+  }
+}
