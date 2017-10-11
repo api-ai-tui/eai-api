@@ -19,7 +19,7 @@
         "description" : "TO DO",
         "parameters" : [ {
           "in" : "query",
-          "name" : "CountryCode",
+          "name" : "ISOCountryCode",
           "description" : "Country code where the requested airport(s) is located (single or multiple; comma delimited)",
           "schema" : {
             "type" : "string"
