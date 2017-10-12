@@ -215,8 +215,8 @@
           }
         } ],
         "responses" : {
-          "200 #1" : {
-            "description" : "Returning an empty response",
+          "204 " : {
+            "description" : "No Content (returning an empty response)",
             "content" : {
               "application/xml" : {
                 "schema" : {
@@ -228,8 +228,8 @@
               }
             }
           },
-          "200 #2" : {
-            "description" : "search results matching criteria",
+          "200 " : {
+            "description" : "OK (search results matching criteria)",
             "content" : {
               "application/xml" : {
                 "schema" : {
@@ -248,13 +248,73 @@
             }
           },
           "400 " : {
-            "description" : "Bad request"
+            "description" : "Bad Request",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "default" : 400
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "default" : "Bad request"
+                    }
+                  }
+                }
+              }
+            }
           },
           "401 " : {
-            "description" : "Unauthorized"
+            "description" : "Unauthorized",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "default" : 401
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "default" : "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
           },
-          "500 " : {
-            "description" : "Internal Server Error"
+          "501 " : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "default" : 501
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "default" : "Internal Server Error"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
