@@ -71,6 +71,20 @@
                   }
                 }
               }
+            },
+            "headers" : {
+              "X-TUI-EAI-Limit" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Limit"
+              },
+              "X-TUI-EAI-NextOffsetLink" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-NextOffsetLink"
+              },
+              "X-TUI-EAI-Offset" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Offset"
+              },
+              "X-TUI-EAI-TotalResults" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-TotalResults"
+              }
             }
           },
           "200 (#1)" : {
@@ -427,7 +441,8 @@
       "X-TUI-EAI-Limit" : {
         "description" : "Maximum number of responses in list. Equals to the query parameter",
         "schema" : {
-          "type" : "integer"
+          "type" : "integer",
+          "default" : 34
         }
       },
       "X-TUI-EAI-NextOffsetLink" : {
@@ -562,6 +577,20 @@
                 }
               } ]
             }
+          }
+        },
+        "headers" : {
+          "X-TUI-EAI-Limit" : {
+            "$ref" : "#/components/headers/X-TUI-EAI-Limit"
+          },
+          "X-TUI-EAI-NextOffsetLink" : {
+            "$ref" : "#/components/headers/X-TUI-EAI-NextOffsetLink"
+          },
+          "X-TUI-EAI-Offset" : {
+            "$ref" : "#/components/headers/X-TUI-EAI-Offset"
+          },
+          "X-TUI-EAI-TotalResults" : {
+            "$ref" : "#/components/headers/X-TUI-EAI-TotalResults"
           }
         }
       }
