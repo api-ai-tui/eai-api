@@ -226,6 +226,20 @@
                   }
                 }
               }
+            },
+            "headers" : {
+              "X-TUI-EAI-Limit" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Limit"
+              },
+              "X-TUI-EAI-NextOffsetLink" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-NextOffsetLink"
+              },
+              "X-TUI-EAI-Offset" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Offset"
+              },
+              "X-TUI-EAI-TotalResults" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-TotalResults"
+              }
             }
           },
           "200 " : {
