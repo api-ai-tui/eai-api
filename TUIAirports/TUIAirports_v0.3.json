@@ -1,0 +1,624 @@
+{
+  "openapi" : "3.0.0",
+  "servers" : [ ],
+  "info" : {
+    "description" : "This API describes endpoints encapsulating the business object TUIAirport(s).",
+    "version" : "0.3",
+    "title" : "TUIAirport API",
+    "contact" : {
+      "name" : "ProductTeam Integration",
+      "email" : "integration@tui.nl"
+    }
+  },
+  "paths" : {
+    "/v0.3/TUIAirports" : {
+      "get" : {
+        "tags" : [ "query" ],
+        "summary" : "returns a list of TUIAirport objects given the search/filer criteria provided",
+        "operationId" : "returnTUIAirportList",
+        "description" : "TO DO",
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "ISOCountryCode",
+          "description" : "Country code where the requested airport(s) is located (single or multiple; comma delimited)",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "IATACityCode",
+          "description" : "IATA City code where the requested airport(s) is located (single or multiple; comma delimited)",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "maxDistanceFrom",
+          "description" : "Coordinates to calculate maximum distance to airport (default is all airports)",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "maxDistance",
+          "description" : "Only return airports closer than provided distance (in km). Default = 100",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "in" : "query",
+          "name" : "limit",
+          "description" : "Maximum number of items in the response",
+          "schema" : {
+            "type" : "integer",
+            "minimum" : 1,
+            "maximum" : 1000,
+            "default" : 100
+          }
+        } ],
+        "responses" : {
+          "204 " : {
+            "description" : "No Content (returning an empty response)",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "array",
+                  "xml" : {
+                    "name" : "TUIAirports"
+                  },
+                  "items" : {
+                    "type" : "object"
+                  }
+                }
+              }
+            }
+          },
+          "200 (#1)" : {
+            "description" : "Returning one single Airport",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "array",
+                  "xml" : {
+                    "name" : "TUIAirports",
+                    "wrapped" : true
+                  },
+                  "items" : {
+                    "type" : "object",
+                    "$ref" : "#/components/schemas/TUIAirport"
+                  }
+                }
+              }
+            },
+            "headers" : {
+              "X-TUI-EAI-Limit" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Limit"
+              },
+              "X-TUI-EAI-NextOffsetLink" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-NextOffsetLink"
+              },
+              "X-TUI-EAI-Offset" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Offset"
+              },
+              "X-TUI-EAI-TotalResults" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-TotalResults"
+              }
+            }
+          },
+          "200 (#2a)" : {
+            "$ref" : "#/components/responses/TUIAirports"
+          },
+          "200 (#2b)" : {
+            "description" : "Return a list of matching criteria",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "xml" : {
+                    "name" : "TUIAirports"
+                  },
+                  "type" : "object",
+                  "properties" : {
+                    "TUIAirport" : {
+                      "type" : "array",
+                      "items" : {
+                        "xml" : {
+                          "name" : "TUIAirport"
+                        },
+                        "type" : "object",
+                        "properties" : {
+                          "ISOCountryCode" : {
+                            "type" : "string",
+                            "example" : "FR"
+                          },
+                          "IATACityCode" : {
+                            "type" : "string",
+                            "example" : "PAR"
+                          },
+                          "IATAAirportCode" : {
+                            "type" : "string",
+                            "example" : "CDG"
+                          },
+                          "geoPosition" : {
+                            "type" : "object",
+                            "properties" : {
+                              "latitude" : {
+                                "type" : "number",
+                                "format" : "float",
+                                "example" : 48.9920096
+                              },
+                              "longitude" : {
+                                "type" : "number",
+                                "format" : "float",
+                                "example" : 2.5109744
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TUIAirport " : {
+                      "type" : "array",
+                      "items" : {
+                        "xml" : {
+                          "name" : "TUIAirport"
+                        },
+                        "type" : "object",
+                        "properties" : {
+                          "ISOCountryCode" : {
+                            "type" : "string",
+                            "example" : "FR"
+                          },
+                          "IATACityCode" : {
+                            "type" : "string",
+                            "example" : "PAR"
+                          },
+                          "IATAAirportCode" : {
+                            "type" : "string",
+                            "example" : "ORY"
+                          },
+                          "geoPosition" : {
+                            "type" : "object",
+                            "properties" : {
+                              "latitude" : {
+                                "type" : "number",
+                                "format" : "float",
+                                "example" : 48.726243
+                              },
+                              "longitude" : {
+                                "type" : "number",
+                                "format" : "float",
+                                "example" : 2.365247
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers" : {
+              "X-TUI-EAI-Limit" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Limit"
+              },
+              "X-TUI-EAI-NextOffsetLink" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-NextOffsetLink"
+              },
+              "X-TUI-EAI-Offset" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Offset"
+              },
+              "X-TUI-EAI-TotalResults" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-TotalResults"
+              }
+            }
+          },
+          "400 " : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "example" : 400
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "example" : "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401 " : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "example" : 401
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "example" : "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500 " : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "type" : "object",
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "example" : 500
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "example" : "Internal Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v0.3/TUIAirports/{IATAAirportCode}" : {
+      "get" : {
+        "tags" : [ "query" ],
+        "summary" : "returns one of zero TUIAirport objects given the search/filer criteria provided",
+        "operationId" : "returnTUIAirport",
+        "description" : "TO DO",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "IATAAirportCode",
+          "description" : "IATA Airport Code",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "example" : 404
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "example" : "Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Returning one single Airport",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "$ref" : "#/components/schemas/TUIAirport"
+                }
+              }
+            },
+            "headers" : {
+              "X-TUI-EAI-Limit" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Limit"
+              },
+              "X-TUI-EAI-NextOffsetLink" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-NextOffsetLink"
+              },
+              "X-TUI-EAI-Offset" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Offset"
+              },
+              "X-TUI-EAI-TotalResults" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-TotalResults"
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "example" : 400
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "example" : "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401 " : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "example" : 401
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "example" : "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500 " : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "type" : "object",
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "example" : 500
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "example" : "Internal Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "headers" : {
+      "X-TUI-EAI-Limit" : {
+        "description" : "Maximum number of responses in list. Equals to the query parameter",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "X-TUI-EAI-NextOffsetLink" : {
+        "description" : "Link to the next Offset of response objects",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "X-TUI-EAI-Offset" : {
+        "description" : "The current Offset",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "X-TUI-EAI-TotalResults" : {
+        "description" : "Total results",
+        "schema" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "schemas" : {
+      "TUIAirports" : {
+        "type" : "array",
+        "xml" : {
+          "name" : "TUIAirports",
+          "wrapped" : true
+        },
+        "items" : {
+          "$ref" : "#/components/schemas/TUIAirport"
+        }
+      },
+      "TUIAirport" : {
+        "type" : "object",
+        "xml" : {
+          "name" : "TUIAirport"
+        },
+        "properties" : {
+          "ISOCountryCode" : {
+            "type" : "string",
+            "example" : "FR"
+          },
+          "IATACityCode" : {
+            "type" : "string",
+            "example" : "PAR"
+          },
+          "IATAAirportCode" : {
+            "type" : "string",
+            "example" : "CDG"
+          },
+          "geoPosition" : {
+            "type" : "object",
+            "$ref" : "#/components/schemas/GeoPosition"
+          }
+        }
+      },
+      "GeoPosition" : {
+        "type" : "object",
+        "properties" : {
+          "latitude" : {
+            "type" : "number",
+            "format" : "float",
+            "example" : 48.9920096
+          },
+          "longitude" : {
+            "type" : "number",
+            "format" : "float",
+            "example" : 2.546165
+          }
+        }
+      }
+    },
+    "responses" : {
+      "TUIAirports" : {
+        "description" : "Response of an Airport",
+        "content" : {
+          "application/xml" : {
+            "schema" : {
+              "type" : "array",
+              "xml" : {
+                "name" : "TUIAirports",
+                "wrapped" : true
+              },
+              "items" : {
+                "type" : "object",
+                "xml" : {
+                  "name" : "TUIAirport"
+                },
+                "properties" : {
+                  "ISOCountryCode" : {
+                    "type" : "string"
+                  },
+                  "IATACityCode" : {
+                    "type" : "string"
+                  },
+                  "IATAAirportCode" : {
+                    "type" : "string"
+                  },
+                  "geoPosition" : {
+                    "type" : "object",
+                    "xml" : {
+                      "name" : "geoPosition"
+                    },
+                    "properties" : {
+                      "latitude" : {
+                        "type" : "number",
+                        "format" : "float"
+                      },
+                      "longitude" : {
+                        "type" : "number",
+                        "format" : "float"
+                      }
+                    }
+                  }
+                }
+              },
+              "example" : [ {
+                "ISOCountryCode" : "FR",
+                "IATACityCode" : "PAR",
+                "IATAAirportCode" : "CDG",
+                "geoPosition" : {
+                  "latitude" : 48.9920096,
+                  "longitude" : 2.5109744
+                }
+              }, {
+                "ISOCountryCode" : "FR",
+                "IATACityCode" : "PAR",
+                "IATAAirportCode" : "ORY",
+                "geoPosition" : {
+                  "latitude" : 48.726243,
+                  "longitude" : 2.365247
+                }
+              } ]
+            }
+          }
+        }
+      }
+    },
+    "examples" : {
+      "CDG" : {
+        "summary" : "Example of Airport Charles de Gaules",
+        "value" : {
+          "ISOCountryCode" : "FR",
+          "IATAAirportCode" : "CDG",
+          "IATACityCode" : "PAR",
+          "geoPosition" : {
+            "latitude" : 48.9920096,
+            "longitude" : 2.5109744
+          }
+        }
+      },
+      "ORY" : {
+        "summary" : "Example of Airport Orly",
+        "value" : {
+          "ISOCountryCode" : "FR",
+          "IATAAirportCode" : "ORY",
+          "IATACityCode" : "PAR",
+          "geoPosition" : {
+            "latitude" : 48.726243,
+            "longitude" : 2.365247
+          }
+        }
+      },
+      "err400" : {
+        "summary" : "Example of err 400 response message",
+        "value" : {
+          "code" : 400,
+          "description" : "Bad request"
+        }
+      },
+      "err401" : {
+        "summary" : "Example of err 401 response message",
+        "value" : {
+          "code" : 401,
+          "description" : "Unauthorized"
+        }
+      },
+      "err404" : {
+        "summary" : "Example of err 404 response message",
+        "value" : {
+          "code" : 404,
+          "description" : "Not Found"
+        }
+      },
+      "err500" : {
+        "summary" : "Example of HTTP Response error 500 message",
+        "value" : {
+          "code" : 500,
+          "description" : "Internal Server Error"
+        }
+      }
+    }
+  }
+}
