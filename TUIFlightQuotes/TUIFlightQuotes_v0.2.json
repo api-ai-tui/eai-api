@@ -251,6 +251,20 @@
                   "$ref" : "#/components/schemas/TUIFlightQuotes"
                 }
               }
+            },
+            "headers" : {
+              "X-TUI-EAI-Limit" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Limit"
+              },
+              "X-TUI-EAI-NextOffsetLink" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-NextOffsetLink"
+              },
+              "X-TUI-EAI-Offset" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Offset"
+              },
+              "X-TUI-EAI-TotalResults" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-TotalResults"
+              }
             }
           },
           "400 " : {
@@ -327,6 +341,33 @@
     }
   },
   "components" : {
+    "headers" : {
+      "X-TUI-EAI-Limit" : {
+        "description" : "Maximum number of responses in list. Equals to the query parameter",
+        "schema" : {
+          "type" : "integer",
+          "default" : 34
+        }
+      },
+      "X-TUI-EAI-NextOffsetLink" : {
+        "description" : "Link to the next Offset of response objects",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "X-TUI-EAI-Offset" : {
+        "description" : "The current Offset",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "X-TUI-EAI-TotalResults" : {
+        "description" : "Total results",
+        "schema" : {
+          "type" : "integer"
+        }
+      }
+    },
     "schemas" : {
       "TUIFlightQuotes" : {
         "type" : "array",
@@ -365,52 +406,59 @@
       },
       "QuoteItems" : {
         "type" : "array",
+        "xml" : {
+          "name" : "QuoteItems",
+          "wrapped" : true
+        },
         "items" : {
           "$ref" : "#/components/schemas/QuoteItem"
         }
       },
       "QuoteItem" : {
         "type" : "object",
+        "xml" : {
+          "name" : "QuoteItem"
+        },
         "properties" : {
-          "quoteItem" : {
+          "paxAssignmentType" : {
+            "type" : "string",
+            "enum" : [ "Adult", "Child", "Infant" ],
+            "example" : "Adult"
+          },
+          "seatsAvailable" : {
+            "type" : "integer",
+            "example" : 12
+          },
+          "componentUnitTypeID" : {
+            "type" : "string"
+          },
+          "flightBasePrice" : {
             "type" : "object",
-            "properties" : {
-              "paxAssignmentType" : {
-                "type" : "string",
-                "enum" : [ "Adult", "Child", "Infant" ],
-                "example" : "Adult"
+            "$ref" : "#/components/schemas/Money"
+          },
+          "paxBirthDates" : {
+            "type" : "array",
+            "xml" : {
+              "name" : "paxBirthDates",
+              "wrapped" : true
+            },
+            "items" : {
+              "type" : "object",
+              "xml" : {
+                "name" : "paxBirthDate"
               },
-              "seatsAvailable" : {
-                "type" : "integer",
-                "example" : 12
-              },
-              "componentUnitTypeID" : {
-                "type" : "string"
-              },
-              "flightBasePrice" : {
-                "type" : "object",
-                "$ref" : "#/components/schemas/Money"
-              },
-              "paxBirthDates" : {
-                "type" : "array",
-                "xml" : {
-                  "name" : "paxBirthDates",
-                  "wrapped" : true
-                },
-                "items" : {
+              "properties" : {
+                "birthDate" : {
                   "type" : "string",
-                  "format" : "date",
-                  "xml" : {
-                    "name" : "paxBirthDate"
-                  }
-                },
-                "example" : [ {
-                  "paxBirthDate" : "1978-11-19"
-                }, {
-                  "paxBirthDate" : "1979-04-25"
-                } ]
+                  "format" : "date"
+                }
               }
-            }
+            },
+            "example" : [ {
+              "birthDate" : "1978-11-19"
+            }, {
+              "birthDate" : "1979-04-25"
+            } ]
           }
         }
       },
