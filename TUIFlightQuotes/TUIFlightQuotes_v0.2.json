@@ -233,16 +233,8 @@
             "content" : {
               "application/xml" : {
                 "schema" : {
-                  "type" : "object",
-                  "xml" : {
-                    "name" : "TUIFlightQuotes"
-                  },
-                  "properties" : {
-                    "TUIFlightQuote" : {
-                      "type" : "array",
-                      "$ref" : "#/components/schemas/TUIFlightQuotes"
-                    }
-                  }
+                  "type" : "array",
+                  "$ref" : "#/components/schemas/TUIFlightQuotes"
                 }
               }
             }
@@ -324,6 +316,10 @@
     "schemas" : {
       "TUIFlightQuotes" : {
         "type" : "array",
+        "xml" : {
+          "name" : "TUIFlightQuotes",
+          "wrapped" : true
+        },
         "items" : {
           "$ref" : "#/components/schemas/TUIFlightQuote"
         }
@@ -340,7 +336,8 @@
           },
           "flightDirection" : {
             "type" : "string",
-            "enum" : [ "out", "return" ]
+            "enum" : [ "out", "return" ],
+            "example" : "return"
           },
           "TUIFlight" : {
             "type" : "object",
