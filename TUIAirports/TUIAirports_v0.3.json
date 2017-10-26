@@ -11,7 +11,7 @@
     }
   },
   "paths" : {
-    "/v0.3/TUIAirports" : {
+    "/v0.3.0/TUIAirports" : {
       "get" : {
         "tags" : [ "query" ],
         "summary" : "returns a list of TUIAirport objects given the search/filer criteria provided",
