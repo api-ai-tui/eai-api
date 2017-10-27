@@ -232,17 +232,7 @@
             "content" : {
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "https://api.swaggerhub.com/domains/tui/DefaultErrors/1.0#/responses/GeneralError"
-                }
-              }
-            }
-          },
-          "403" : {
-            "description" : "asdfsdaf",
-            "content" : {
-              "application/xml" : {
-                "schema" : {
-                  "$ref" : "https://api.swaggerhub.com/domains/tui/DefaultErrors/1.0#/responses/GeneralErrorTwo"
+                  "$ref" : "https://api.swaggerhub.com/domains/tui/DefaultErrors/1.0#/responses/400"
                 }
               }
             }
