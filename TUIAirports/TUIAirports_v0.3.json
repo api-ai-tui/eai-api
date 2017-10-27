@@ -232,20 +232,7 @@
             "content" : {
               "application/xml" : {
                 "schema" : {
-                  "type" : "object",
-                  "xml" : {
-                    "name" : "error"
-                  },
-                  "properties" : {
-                    "code" : {
-                      "type" : "integer",
-                      "example" : 400
-                    },
-                    "description" : {
-                      "type" : "string",
-                      "example" : "Bad request"
-                    }
-                  }
+                  "$ref" : "https://app.swaggerhub.com/domains/tui/DefaultErrors/1.0#/responses/400"
                 }
               }
             }
