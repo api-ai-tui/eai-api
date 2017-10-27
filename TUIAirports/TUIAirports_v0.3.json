@@ -242,7 +242,7 @@
             "content" : {
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "https://api.swaggerhub.com/domains/tui/DefaultErrors/1.0#/responses/GeneralError"
+                  "$ref" : "https://api.swaggerhub.com/domains/tui/DefaultErrors/1.0#/responses/GeneralErrorTwo"
                 }
               }
             }
