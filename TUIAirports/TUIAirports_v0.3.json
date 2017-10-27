@@ -237,6 +237,16 @@
               }
             }
           },
+          "403" : {
+            "description" : "asdfsdaf",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "https://api.swaggerhub.com/domains/tui/DefaultErrors/1.0#/responses/GeneralError"
+                }
+              }
+            }
+          },
           "401 " : {
             "description" : "Unauthorized",
             "content" : {
