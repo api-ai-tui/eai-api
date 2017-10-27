@@ -232,7 +232,7 @@
             "content" : {
               "application/xml" : {
                 "schema" : {
-                  "$ref" : "https://api.swaggerhub.com/domains/tui/DefaultErrors/1.0#/responses/400"
+                  "$ref" : "https://swaggerhub.com/domains/tui/DefaultErrors/1.0#/responses/400"
                 }
               }
             }
