@@ -11,7 +11,7 @@
     }
   },
   "paths" : {
-    "/v0.3/location/airports" : {
+    "/v0.3/locations/airports" : {
       "get" : {
         "tags" : [ "query" ],
         "summary" : "returns a list of TUIAirport objects given the search/filer criteria provided",
@@ -286,7 +286,7 @@
         }
       }
     },
-    "/v0.3/location/airports/{iata-airportcode}" : {
+    "/v0.3/locations/airports/{iata-airportcode}" : {
       "get" : {
         "tags" : [ "query" ],
         "summary" : "returns one of zero TUIAirport objects given the search/filer criteria provided",
