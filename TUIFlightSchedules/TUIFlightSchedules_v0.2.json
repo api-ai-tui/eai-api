@@ -1,0 +1,525 @@
+{
+  "openapi" : "3.0.0",
+  "servers" : [ ],
+  "info" : {
+    "description" : "This API describes endpoints encapsulating the business object TUIflightschedule(s).",
+    "version" : "0.2",
+    "title" : "TUIFlightSchedules API",
+    "contact" : {
+      "name" : "ProductTeam Integration",
+      "email" : "productteamintegration@tui.nl"
+    }
+  },
+  "paths" : {
+    "/v0.2/flights/schedules" : {
+      "get" : {
+        "tags" : [ "query" ],
+        "summary" : "returns a list of TUIFlightSchedule objects given the search/filer criteria provided",
+        "operationId" : "returnFlightScheduleList",
+        "description" : "TO DO",
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "originIATAAirportCode",
+          "description" : "IATA code of the origin airport (single or multiple; comma delimited)",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "AMS"
+        }, {
+          "in" : "query",
+          "name" : "destinationIATAAirportCode",
+          "description" : "IATA code of the destination airport (single or multiple; comma delimited)",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "POP"
+        }, {
+          "in" : "query",
+          "name" : "originDepartureDatePeriodFrom",
+          "description" : "Date range departing from origin airport [From date]",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "example" : "2019-04-23"
+        }, {
+          "in" : "query",
+          "name" : "originDepartureDatePeriodTo",
+          "description" : "Date range departing from origin airport [To date]",
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "example" : "2019-04-25"
+        }, {
+          "in" : "query",
+          "name" : "includeTimeTable",
+          "description" : "Include departure and arrival date & time in the response. Default is false.",
+          "schema" : {
+            "type" : "boolean",
+            "default" : false
+          },
+          "example" : false
+        }, {
+          "in" : "query",
+          "name" : "limit",
+          "description" : "Maximum number of items in the response",
+          "schema" : {
+            "type" : "integer",
+            "minimum" : 1,
+            "maximum" : 1000,
+            "default" : 100
+          }
+        } ],
+        "responses" : {
+          "200 (#1)" : {
+            "description" : "return results matching criteria",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "array",
+                  "xml" : {
+                    "name" : "TUIFlightSchedules",
+                    "wrapped" : true
+                  },
+                  "items" : {
+                    "type" : "object",
+                    "xml" : {
+                      "name" : "TUIFlightSchedule"
+                    },
+                    "properties" : {
+                      "departureIATAAirportCode" : {
+                        "type" : "string",
+                        "example" : "AMS"
+                      },
+                      "arrivalIATAAirportCode" : {
+                        "type" : "string",
+                        "example" : "TFS"
+                      },
+                      "departureDate" : {
+                        "type" : "string",
+                        "format" : "date",
+                        "example" : "2019-04-17"
+                      },
+                      "TUIFlights" : {
+                        "type" : "object",
+                        "xml" : {
+                          "name" : "TUIFlights"
+                        },
+                        "properties" : {
+                          "TUIFlight" : {
+                            "type" : "array",
+                            "items" : {
+                              "type" : "object",
+                              "xml" : {
+                                "name" : "TUIFlight"
+                              },
+                              "properties" : {
+                                "productID" : {
+                                  "type" : "string"
+                                },
+                                "scheduleEntryID" : {
+                                  "type" : "string"
+                                },
+                                "departureIATAAirportCode" : {
+                                  "type" : "string"
+                                },
+                                "departureTime" : {
+                                  "type" : "string",
+                                  "format" : "date-time"
+                                },
+                                "arrivalIATAAirportCode" : {
+                                  "type" : "string"
+                                },
+                                "arrivalTime" : {
+                                  "type" : "string",
+                                  "format" : "date-time"
+                                },
+                                "carrierCode" : {
+                                  "type" : "string"
+                                },
+                                "flightNumber" : {
+                                  "type" : "string"
+                                },
+                                "numberOfStops" : {
+                                  "type" : "integer"
+                                }
+                              }
+                            },
+                            "example" : [ {
+                              "productID" : "Tussy-1234567890",
+                              "departureIATAAirportCode" : "AMS",
+                              "departureTime" : "2019-04-17T08:15+02:00",
+                              "arrivalIATAAirportCode" : "TFS",
+                              "arrivalTime" : "2019-04-17T12:30+01:00",
+                              "carrierCode" : "OR",
+                              "flightNumber" : "OR302",
+                              "numberOfStops" : 0
+                            }, {
+                              "productID" : "Tussy-1234567894",
+                              "departureIATAAirportCode" : "AMS",
+                              "departureTime" : "2019-04-17T18:15+02:00",
+                              "arrivalIATAAirportCode" : "TFS",
+                              "arrivalTime" : "2019-04-17T22:30+01:00",
+                              "carrierCode" : "OR",
+                              "flightNumber" : "OR304",
+                              "numberOfStops" : 1
+                            } ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers" : {
+              "X-TUI-EAI-Limit" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Limit"
+              },
+              "X-TUI-EAI-NextOffsetLink" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-NextOffsetLink"
+              },
+              "X-TUI-EAI-Offset" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Offset"
+              },
+              "X-TUI-EAI-TotalResults" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-TotalResults"
+              }
+            }
+          },
+          "200 (#2)" : {
+            "description" : "return results matching criteria",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "xml" : {
+                    "name" : "TUIFlightSchedules"
+                  },
+                  "properties" : {
+                    "Schedule0" : {
+                      "type" : "object",
+                      "xml" : {
+                        "name" : "TUIFlightSchedule"
+                      },
+                      "properties" : {
+                        "departureIATAAirportCode" : {
+                          "type" : "string",
+                          "example" : "AMS"
+                        },
+                        "arrivalIATAAirportCode" : {
+                          "type" : "string",
+                          "example" : "TFS"
+                        },
+                        "departureDate" : {
+                          "type" : "string",
+                          "format" : "date",
+                          "example" : "2019-04-17"
+                        }
+                      }
+                    },
+                    "Schedule1" : {
+                      "type" : "object",
+                      "xml" : {
+                        "name" : "TUIFlightSchedule"
+                      },
+                      "properties" : {
+                        "departureIATAAirportCode" : {
+                          "type" : "string",
+                          "example" : "AMS"
+                        },
+                        "arrivalIATAAirportCode" : {
+                          "type" : "string",
+                          "example" : "TFS"
+                        },
+                        "departureDate" : {
+                          "type" : "string",
+                          "format" : "date",
+                          "example" : "2019-04-18"
+                        }
+                      }
+                    },
+                    "Schedule2" : {
+                      "type" : "object",
+                      "xml" : {
+                        "name" : "TUIFlightSchedule"
+                      },
+                      "properties" : {
+                        "departureIATAAirportCode" : {
+                          "type" : "string",
+                          "example" : "AMS"
+                        },
+                        "arrivalIATAAirportCode" : {
+                          "type" : "string",
+                          "example" : "TFS"
+                        },
+                        "departureDate" : {
+                          "type" : "string",
+                          "format" : "date",
+                          "example" : "2019-04-19"
+                        }
+                      }
+                    },
+                    "Schedule4" : {
+                      "type" : "object",
+                      "xml" : {
+                        "name" : "TUIFlightSchedule"
+                      },
+                      "properties" : {
+                        "departureIATAAirportCode" : {
+                          "type" : "string",
+                          "example" : "AMS"
+                        },
+                        "arrivalIATAAirportCode" : {
+                          "type" : "string",
+                          "example" : "TFS"
+                        },
+                        "departureDate" : {
+                          "type" : "string",
+                          "format" : "date",
+                          "example" : "2019-04-21"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers" : {
+              "X-TUI-EAI-Limit" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Limit"
+              },
+              "X-TUI-EAI-NextOffsetLink" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-NextOffsetLink"
+              },
+              "X-TUI-EAI-Offset" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Offset"
+              },
+              "X-TUI-EAI-TotalResults" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-TotalResults"
+              }
+            }
+          },
+          "204 " : {
+            "description" : "No Content (returning an empty response)",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "array",
+                  "xml" : {
+                    "name" : "TUIFlightSchedules"
+                  },
+                  "items" : {
+                    "type" : "object"
+                  }
+                }
+              }
+            },
+            "headers" : {
+              "X-TUI-EAI-Limit" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Limit"
+              },
+              "X-TUI-EAI-NextOffsetLink" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-NextOffsetLink"
+              },
+              "X-TUI-EAI-Offset" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-Offset"
+              },
+              "X-TUI-EAI-TotalResults" : {
+                "$ref" : "#/components/headers/X-TUI-EAI-TotalResults"
+              }
+            }
+          },
+          "400 " : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "example" : 400
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "example" : "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401 " : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object",
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "example" : 401
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "example" : "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500 " : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "xml" : {
+                    "name" : "error"
+                  },
+                  "type" : "object",
+                  "properties" : {
+                    "code" : {
+                      "type" : "integer",
+                      "example" : 500
+                    },
+                    "description" : {
+                      "type" : "string",
+                      "example" : "Internal Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "headers" : {
+      "X-TUI-EAI-Limit" : {
+        "description" : "Maximum number of responses in list. Equals to the query parameter",
+        "schema" : {
+          "type" : "integer",
+          "default" : 34
+        }
+      },
+      "X-TUI-EAI-NextOffsetLink" : {
+        "description" : "Link to the next Offset of response objects",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "X-TUI-EAI-Offset" : {
+        "description" : "The current Offset",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "X-TUI-EAI-TotalResults" : {
+        "description" : "Total results",
+        "schema" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "schemas" : {
+      "TUIFlightSchedules" : {
+        "type" : "array",
+        "xml" : {
+          "name" : "TUIFlightSchedules",
+          "wrapped" : true
+        },
+        "items" : {
+          "$ref" : "#/components/schemas/TUIFlightSchedule"
+        }
+      },
+      "TUIFlightSchedule" : {
+        "type" : "object",
+        "xml" : {
+          "name" : "TUIFlightSchedule"
+        },
+        "properties" : {
+          "departureIATAAirportCode" : {
+            "type" : "string",
+            "example" : "BRU"
+          },
+          "departureDate" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "2020-05-31"
+          },
+          "arrivalIATAAirportCode" : {
+            "type" : "string",
+            "example" : "PRS"
+          },
+          "TUIFlights" : {
+            "type" : "array",
+            "xml" : {
+              "name" : "TUIFlights",
+              "wrapped" : true
+            },
+            "items" : {
+              "$ref" : "#/components/schemas/TUIFlight"
+            }
+          }
+        }
+      },
+      "TUIFlight" : {
+        "type" : "object",
+        "xml" : {
+          "name" : "TUIFlight"
+        },
+        "properties" : {
+          "productID" : {
+            "type" : "string",
+            "example" : "Tussy-1234567890"
+          },
+          "scheduleEntryID" : {
+            "type" : "string"
+          },
+          "departureIATAAirportCode" : {
+            "type" : "string",
+            "example" : "BRU"
+          },
+          "departureDateTime" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-05-31T15:59+02:00"
+          },
+          "arrivalIATAAirportCode" : {
+            "type" : "string",
+            "example" : "POP"
+          },
+          "arrivalDateTime" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-05-31T21:35-04:00"
+          },
+          "carrierCode" : {
+            "type" : "string",
+            "example" : "OR"
+          },
+          "flightNumber" : {
+            "type" : "string",
+            "example" : "OR302"
+          },
+          "numberOfStops" : {
+            "type" : "integer",
+            "minimum" : 0,
+            "example" : 1
+          }
+        }
+      }
+    }
+  }
+}
