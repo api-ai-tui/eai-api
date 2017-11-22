@@ -7,11 +7,11 @@
     "title" : "TUIFlightQuotes API",
     "contact" : {
       "name" : "Product Team Integration",
-      "email" : "integration@tui.nl"
+      "email" : "productteamintegration@tui.nl"
     }
   },
   "paths" : {
-    "/v0.2/TUIFlightQuotes" : {
+    "/v0.2/flights/quotes" : {
       "get" : {
         "summary" : "searches TUIFlightQuotes",
         "operationId" : "searchTUIFlightQuotes",
