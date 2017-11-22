@@ -7,11 +7,11 @@
     "title" : "TUIAirport API",
     "contact" : {
       "name" : "ProductTeam Integration",
-      "email" : "integration@tui.nl"
+      "email" : "productteamintegration@tui.nl"
     }
   },
   "paths" : {
-    "/v0.3.0/TUIAirports" : {
+    "/v0.3/location/airports" : {
       "get" : {
         "tags" : [ "query" ],
         "summary" : "returns a list of TUIAirport objects given the search/filer criteria provided",
@@ -286,7 +286,7 @@
         }
       }
     },
-    "/v0.3/TUIAirports/{IATAAirportCode}" : {
+    "/v0.3/location/airports/{iata-airportcode}" : {
       "get" : {
         "tags" : [ "query" ],
         "summary" : "returns one of zero TUIAirport objects given the search/filer criteria provided",
