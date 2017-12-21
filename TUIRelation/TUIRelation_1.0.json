@@ -1,0 +1,784 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "TUIRelation API",
+    "description" : "A master system managing the TUIRelation business object posts changes using these events.",
+    "version" : "1.0",
+    "contact" : {
+      "name" : "ProductTeam Integration",
+      "email" : "productteamintegration@tui.nl"
+    }
+  },
+  "servers" : [ ],
+  "paths" : {
+    "/v0.1/relations/events" : {
+      "post" : {
+        "tags" : [ "event" ],
+        "summary" : "Post an event to the queue",
+        "description" : "- TUIRelationCreated\\: indicates a relation was created, the new relation is attached in the body1 \n- TUIRelationDeduplicated\\: indicates double relations were de-duplicated changed, the relation that is inactivated (merged into other relation) is attached in the body.\n- TUIRelationMerged\\: indicates two relations were merged (resulting from a de-duplication), the relation that survives and holds the merged data is attached in the body.\n- TUIRelationChanged\\: indicates changes were made in the relation, the new relation is attached in the body.\n- TUIRelationRetentionDelete\\: indicates a relation record is deleted because of retention policy, the reviewed relation is attached in the body.\n- TUIRelationPrivacyDelete\\: indicates a relation record is deleted because of privacy policy, the reviewed relation is attached in the body.\n- TUIRelationDeceasedDelete\\: indicates a relation record is deleted because of a recorded decease event, the reviewed relation is attached in the body.\n",
+        "requestBody" : {
+          "description" : "the TUIRelationEvent object",
+          "required" : true,
+          "content" : {
+            "application/xml" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TUIRelationEvent"
+              }
+            }
+          }
+        },
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "eventType",
+          "description" : "Event that occurred",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "TUIRelationCreated", "TUIRelationDeduplicated", "TUIRelationMerged", "TUIRelationChanged", "TUIRelationRetentionDelete", "TUIRelationPrivacyDelete", "TUIRelationDeceasedDelete" ]
+          },
+          "example" : "TUIRelationCreated"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "TUIRelationEvent" : {
+        "type" : "object",
+        "required" : [ "eventID", "eventType", "generationTS", "payload", "schemaVersion" ],
+        "properties" : {
+          "eventID" : {
+            "type" : "string"
+          },
+          "eventType" : {
+            "type" : "string",
+            "$ref" : "#/components/schemas/EventType"
+          },
+          "generationTS" : {
+            "type" : "string",
+            "description" : "Date and time when this event was produced",
+            "format" : "dateTime",
+            "example" : "1996-12-19T16:39:57-08:00"
+          },
+          "payload" : {
+            "type" : "object",
+            "properties" : {
+              "TUIRelation" : {
+                "type" : "object",
+                "$ref" : "#/components/schemas/TUIRelation"
+              }
+            }
+          },
+          "schemaVersion" : {
+            "type" : "string",
+            "example" : "1.60",
+            "xml" : {
+              "attribute" : true
+            }
+          }
+        }
+      },
+      "EventType" : {
+        "type" : "string",
+        "enum" : [ "TUIRelationCreated", "TUIRelationDeduplicated", "TUIRelationMerged", "TUIRelationChanged", "TUIRelationRetentionDelete", "TUIRelationPrivacyDelete", "TUIRelationDeceasedDelete" ]
+      },
+      "TUIRelation" : {
+        "type" : "object",
+        "description" : "A TUIRelation holds information about the Identity and Capacity of individuals and organizations that TUI has relations with.",
+        "required" : [ "state", "relationID", "lastChangeTS", "version", "masterID", "alternateIDs", "stateLog", "party", "contactPoints", "capacities" ],
+        "xml" : {
+          "name" : "TUIRelation",
+          "wrapped" : true
+        },
+        "properties" : {
+          "objectSchemaVersion" : {
+            "type" : "string",
+            "xml" : {
+              "attribute" : true
+            },
+            "example" : "1.6"
+          },
+          "state" : {
+            "type" : "string",
+            "$ref" : "#/components/schemas/RelationState"
+          },
+          "relationID" : {
+            "type" : "string",
+            "description" : "ID key for this relation.",
+            "example" : 122345456
+          },
+          "lastChangeTS" : {
+            "type" : "string",
+            "format" : "dateTime",
+            "example" : "1996-12-19T16:39:57-08:00"
+          },
+          "version" : {
+            "type" : "integer",
+            "example" : 1,
+            "description" : "Version number of this Reservation. Starts initially with 1"
+          },
+          "masterID" : {
+            "type" : "object",
+            "xml" : {
+              "name" : "masterID"
+            },
+            "description" : "Unique ID for this relation - managed by the master system managing this relation object.",
+            "properties" : {
+              "relationID" : {
+                "type" : "string",
+                "example" : "jits_01234570"
+              },
+              "system" : {
+                "type" : "string",
+                "enum" : [ "C4C", "MDM", "TOR", "JUMPCRM" ]
+              }
+            }
+          },
+          "alternateIDs" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "$ref" : "#/components/schemas/alternateID"
+            }
+          },
+          "stateLog" : {
+            "type" : "object",
+            "$ref" : "#/components/schemas/StateLog"
+          },
+          "party" : {
+            "type" : "object",
+            "$ref" : "#/components/schemas/Party"
+          },
+          "contactPoints" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "anyOf" : [ {
+                "$ref" : "#/components/schemas/PostalAddressContactPoint"
+              }, {
+                "$ref" : "#/components/schemas/EmailContactPoint"
+              }, {
+                "$ref" : "#/components/schemas/PhoneContactPoint"
+              }, {
+                "$ref" : "#/components/schemas/AccountContactPoint"
+              } ]
+            }
+          },
+          "capacities" : {
+            "xml" : {
+              "name" : "capacities",
+              "wrapped" : true
+            },
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "$ref" : "#/components/schemas/Capacity"
+            }
+          }
+        }
+      },
+      "Capacity" : {
+        "xml" : {
+          "name" : "capacity",
+          "wrapped" : true
+        },
+        "type" : "object",
+        "required" : [ "capacityID", "capacityTypeCode", "owners", "consents", "preferences", "notes" ],
+        "properties" : {
+          "capacityID" : {
+            "type" : "string",
+            "example" : "jits_01234571"
+          },
+          "capacityTypeCode" : {
+            "type" : "string",
+            "example" : "jits_01234572"
+          },
+          "linkedContactPoints" : {
+            "type" : "string"
+          },
+          "owners" : {
+            "xml" : {
+              "name" : "owners",
+              "wrapped" : true
+            },
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "$ref" : "#/components/schemas/CapacityOwner"
+            }
+          },
+          "consents" : {
+            "xml" : {
+              "name" : "consents",
+              "wrapped" : true
+            },
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "$ref" : "#/components/schemas/Consent"
+            }
+          },
+          "preferences" : {
+            "xml" : {
+              "name" : "preferences",
+              "wrapped" : true
+            },
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "$ref" : "#/components/schemas/Preference"
+            }
+          },
+          "notes" : {
+            "xml" : {
+              "name" : "notes",
+              "wrapped" : true
+            },
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "$ref" : "#/components/schemas/Note"
+            }
+          }
+        }
+      },
+      "CapacityOwner" : {
+        "xml" : {
+          "name" : "owner",
+          "wrapped" : true
+        },
+        "type" : "object",
+        "required" : [ "ownerSince", "ownerRelationID" ],
+        "properties" : {
+          "ownerSince" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "1996-12-19"
+          },
+          "ownerRelationID" : {
+            "type" : "string",
+            "example" : "jits_01234575"
+          }
+        }
+      },
+      "Consent" : {
+        "xml" : {
+          "name" : "consent",
+          "wrapped" : true
+        },
+        "type" : "object",
+        "required" : [ "consentID", "consentType", "consentGiven" ],
+        "properties" : {
+          "consentID" : {
+            "type" : "string",
+            "example" : "jits_01234574"
+          },
+          "consentType" : {
+            "type" : "string",
+            "example" : "????"
+          },
+          "consentGiven" : {
+            "type" : "boolean",
+            "example" : true
+          },
+          "effectiveStartDate" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "2017-12-19"
+          },
+          "effectiveEndDate" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "2018-12-19"
+          },
+          "contactPointIDs" : {
+            "type" : "string",
+            "example" : "jits_01234575"
+          }
+        }
+      },
+      "Preference" : {
+        "xml" : {
+          "name" : "preference",
+          "wrapped" : true
+        },
+        "type" : "object",
+        "required" : [ "preferenceID", "preferenceType", "value", "effectiveStartDate", "effectiveEndDate" ],
+        "properties" : {
+          "preferenceID" : {
+            "type" : "string",
+            "example" : "jits_01234576"
+          },
+          "preferenceType" : {
+            "type" : "string",
+            "example" : "????"
+          },
+          "value" : {
+            "type" : "string",
+            "example" : "?????"
+          },
+          "effectiveStartDate" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "2017-12-19"
+          },
+          "effectiveEndDate" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "2019-12-19"
+          },
+          "contactPointIDs" : {
+            "type" : "string",
+            "example" : "jits_01234575"
+          }
+        }
+      },
+      "Note" : {
+        "xml" : {
+          "name" : "note",
+          "wrapped" : true
+        },
+        "type" : "object",
+        "required" : [ "noteID", "created", "noteType", "noteContent", "author_unitPartyID", "author_userCapacityID" ],
+        "properties" : {
+          "noteID" : {
+            "type" : "string",
+            "description" : "unique ID for this note",
+            "example" : "jits_01234577"
+          },
+          "created" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "2016-12-19"
+          },
+          "noteType" : {
+            "type" : "string",
+            "example" : "????"
+          },
+          "noteContent" : {
+            "type" : "string",
+            "description" : "the actual note",
+            "example" : "Some note content here"
+          },
+          "author_unitPartyID" : {
+            "type" : "string",
+            "example" : "jits_01234578"
+          },
+          "author_userCapacityID" : {
+            "type" : "string",
+            "example" : "jits_01234579"
+          }
+        }
+      },
+      "AccountContactPoint" : {
+        "xml" : {
+          "name" : "contactpoint",
+          "wrapped" : true
+        },
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/Contactpoint"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "AccountContactPoint" : {
+              "required" : [ "accountID" ],
+              "properties" : {
+                "accountType" : {
+                  "type" : "string",
+                  "example" : "?????"
+                },
+                "accountID" : {
+                  "type" : "string",
+                  "example" : "jits_01234580"
+                },
+                "name" : {
+                  "type" : "string",
+                  "example" : "?????"
+                }
+              }
+            }
+          }
+        } ]
+      },
+      "PhoneContactPoint" : {
+        "xml" : {
+          "name" : "contactpoint",
+          "wrapped" : true
+        },
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/Contactpoint"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "PhoneContactPoint" : {
+              "xml" : {
+                "name" : "phoneContactPoint"
+              },
+              "required" : [ "lineNumber", "formatType" ],
+              "properties" : {
+                "lineNumber" : {
+                  "type" : "string",
+                  "example" : 50112233
+                },
+                "lineType" : {
+                  "type" : "string",
+                  "example" : "landline"
+                },
+                "internationDialingCode" : {
+                  "type" : "string",
+                  "example" : "+32"
+                },
+                "formatType" : {
+                  "type" : "string",
+                  "example" : "????"
+                }
+              }
+            }
+          }
+        } ]
+      },
+      "EmailContactPoint" : {
+        "xml" : {
+          "name" : "contactpoint",
+          "wrapped" : true
+        },
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/Contactpoint"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "EmailContactPoint" : {
+              "required" : [ "email" ],
+              "properties" : {
+                "email" : {
+                  "type" : "string",
+                  "example" : "user@example.com"
+                }
+              }
+            }
+          }
+        } ]
+      },
+      "PostalAddressContactPoint" : {
+        "xml" : {
+          "name" : "contactpoint",
+          "wrapped" : true
+        },
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/Contactpoint"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "postalAddressContactPoint" : {
+              "type" : "object",
+              "required" : [ "structureType" ],
+              "properties" : {
+                "buildingnumber" : {
+                  "type" : "string",
+                  "example" : 115
+                },
+                "buildingname" : {
+                  "type" : "string",
+                  "example" : "Excelsior"
+                },
+                "subBuilding" : {
+                  "type" : "string",
+                  "example" : "A"
+                },
+                "street" : {
+                  "type" : "string",
+                  "example" : "lollerstreet"
+                },
+                "substreet" : {
+                  "type" : "string",
+                  "example" : "????"
+                },
+                "town" : {
+                  "type" : "string",
+                  "example" : "Kiddlington"
+                },
+                "region" : {
+                  "type" : "string",
+                  "example" : "London Area"
+                },
+                "county" : {
+                  "type" : "string",
+                  "example" : "Oxford"
+                },
+                "pobox" : {
+                  "type" : "string",
+                  "example" : "B"
+                },
+                "postalCode" : {
+                  "type" : "string",
+                  "example" : "81243AF"
+                },
+                "countryCode" : {
+                  "type" : "string",
+                  "example" : "BEL"
+                },
+                "unstructuredLine" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string",
+                    "example" : [ "addressed to Bob Sinclair", "Press hard because bell doesn't work properly" ]
+                  }
+                },
+                "structureType" : {
+                  "type" : "string",
+                  "example" : "????"
+                }
+              }
+            }
+          }
+        } ]
+      },
+      "Contactpoint" : {
+        "required" : [ "contactPointID", "type", "priority" ],
+        "type" : "object",
+        "xml" : {
+          "wrapped" : true,
+          "name" : "contactpoint"
+        },
+        "properties" : {
+          "contactPointID" : {
+            "type" : "string",
+            "description" : "Unique ID of this contactpoint",
+            "example" : "jits_01234581"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "Email", "Phone", "PostalAddress", "Account" ]
+          },
+          "category" : {
+            "type" : "string",
+            "$ref" : "#/components/schemas/Category"
+          },
+          "priority" : {
+            "type" : "string",
+            "$ref" : "#/components/schemas/Priority"
+          },
+          "lastValidated" : {
+            "type" : "string",
+            "format" : "dateTime",
+            "example" : "1996-12-19T16:39:57-08:00"
+          },
+          "effectiveStartDate" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "1996-12-19"
+          },
+          "effectiveEndDate" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "2019-12-19"
+          },
+          "qualityLevel" : {
+            "type" : "string",
+            "example" : "????"
+          }
+        }
+      },
+      "Priority" : {
+        "type" : "string",
+        "enum" : [ "First", "Second", "Third", "Emergency" ]
+      },
+      "Category" : {
+        "type" : "string",
+        "enum" : [ "Personal", "Business" ]
+      },
+      "Gender" : {
+        "type" : "string",
+        "enum" : [ "Male", "Female", "Unknown" ]
+      },
+      "RelationState" : {
+        "type" : "string",
+        "description" : "Current state of the relation - Active \\ Inactive",
+        "example" : "Active",
+        "enum" : [ "Active", "Inactive" ]
+      },
+      "alternateID" : {
+        "type" : "object",
+        "$ref" : "#/components/schemas/RelationID"
+      },
+      "RelationID" : {
+        "type" : "object",
+        "required" : [ "relationID", "system" ],
+        "properties" : {
+          "relationID" : {
+            "type" : "string",
+            "example" : "jits_01234584"
+          },
+          "system" : {
+            "type" : "string",
+            "enum" : [ "C4C", "MDM", "TOR", "JUMPCRM" ]
+          }
+        }
+      },
+      "Party" : {
+        "type" : "object",
+        "required" : [ "partyID", "partyType", "individualParty", "organizationParty" ],
+        "properties" : {
+          "partyID" : {
+            "type" : "string",
+            "description" : "ID key for this party.",
+            "example" : "jits_01234585"
+          },
+          "partyType" : {
+            "type" : "object",
+            "description" : "Individual / Organization",
+            "$ref" : "#/components/schemas/PartyType"
+          }
+        },
+        "oneOf" : [ {
+          "$ref" : "#/components/schemas/IndividualParty"
+        }, {
+          "$ref" : "#/components/schemas/OrganizationParty"
+        } ]
+      },
+      "PartyType" : {
+        "type" : "string",
+        "enum" : [ "Individual", "Organisation" ]
+      },
+      "IndividualParty" : {
+        "required" : [ "lastname", "passport_lastname", "gender" ],
+        "type" : "object",
+        "xml" : {
+          "wrapped" : true
+        },
+        "properties" : {
+          "salutation" : {
+            "type" : "string",
+            "description" : "Salutation for this individual",
+            "example" : "mr."
+          },
+          "firstname" : {
+            "type" : "string",
+            "description" : "firstname as preferred by this individual",
+            "example" : "Hector"
+          },
+          "initials" : {
+            "type" : "string",
+            "description" : "initials as prefferred by this individual",
+            "example" : "H"
+          },
+          "lastname" : {
+            "type" : "string",
+            "description" : "lastname as preferred by the individual",
+            "example" : "Leman"
+          },
+          "passport_firstname" : {
+            "type" : "string",
+            "description" : "firstname for this individual as appears on the passport",
+            "example" : "Hector"
+          },
+          "passport_initials" : {
+            "type" : "string",
+            "description" : "initials for this individual as appears on the passport",
+            "example" : "H"
+          },
+          "passport_lastname" : {
+            "type" : "string",
+            "description" : "lastname for this individual as appears on the passport (default = copy lastname)",
+            "example" : "Leman"
+          },
+          "passport_number" : {
+            "type" : "string",
+            "example" : 1.2315412348579E13
+          },
+          "dateOfBirth" : {
+            "type" : "string",
+            "format" : "date",
+            "example" : "1955-02-15"
+          },
+          "nationality" : {
+            "type" : "string",
+            "description" : "ISO 3166-1 alpha-3 code indicating the country were nationality is held",
+            "example" : "BEL"
+          },
+          "gender" : {
+            "type" : "string",
+            "description" : "Male / Female / Unknown",
+            "$ref" : "#/components/schemas/Gender"
+          }
+        }
+      },
+      "OrganizationParty" : {
+        "required" : [ "organizationType", "organizationname" ],
+        "type" : "object",
+        "xml" : {
+          "wrapped" : true
+        },
+        "properties" : {
+          "organizationType" : {
+            "type" : "string",
+            "description" : "Type code of this organisation ( e.g.: Company, TravelGroup, etc.. )",
+            "example" : "TravelGroup"
+          },
+          "organisationName" : {
+            "type" : "string",
+            "description" : "Name a preferred by the organization",
+            "example" : "TUI Travel PLC"
+          }
+        }
+      },
+      "StateLog" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "$ref" : "#/components/schemas/RelationStateDetail"
+        },
+        "xml" : {
+          "wrapped" : true
+        }
+      },
+      "RelationStateDetail" : {
+        "type" : "object",
+        "required" : [ "newVersion", "newState", "action", "changes", "actionTs" ],
+        "xml" : {
+          "wrapped" : true,
+          "name" : "relationStateDetail"
+        },
+        "properties" : {
+          "newVersion" : {
+            "type" : "integer",
+            "description" : "version number after this statechange",
+            "example" : 13
+          },
+          "newState" : {
+            "type" : "string",
+            "$ref" : "#/components/schemas/RelationState"
+          },
+          "action" : {
+            "type" : "string",
+            "enum" : [ "Created", "Merged", "Deduplicated", "Updated", "PrivacyDelete", "RetentionDelete", "DeceasedDelete" ]
+          },
+          "changes" : {
+            "type" : "string",
+            "description" : "indicates what section of this relation were changed",
+            "enum" : [ "PartyDetailsChanged", "CapacityDetailsChanged", "ContactDetailsChanged" ]
+          },
+          "actionTS" : {
+            "description" : "timestamp when this state change was recorded",
+            "type" : "string",
+            "example" : "1996-12-19T16:39:57-08:00",
+            "format" : "dateTime"
+          },
+          "changer_unitRelationID" : {
+            "description" : "links to the unit of the business unit who made the changes",
+            "example" : "unit",
+            "type" : "string"
+          },
+          "changer_userCapacityID" : {
+            "description" : "links to the capacity of the person who made the change",
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}
