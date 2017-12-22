@@ -34,8 +34,7 @@
           "schema" : {
             "type" : "string",
             "enum" : [ "TUIRelationCreated", "TUIRelationDeduplicated", "TUIRelationMerged", "TUIRelationChanged", "TUIRelationRetentionDelete", "TUIRelationPrivacyDelete", "TUIRelationDeceasedDelete" ]
-          },
-          "example" : "TUIRelationCreated"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -622,6 +621,7 @@
       "Party" : {
         "type" : "object",
         "required" : [ "partyID", "partyType", "individualParty", "organizationParty" ],
+        "description" : "Attention! Use IndividualParty or OrganizationalParty, for the generation of the example xml IndividualParty is selected.",
         "properties" : {
           "partyID" : {
             "type" : "string",
