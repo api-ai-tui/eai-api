@@ -15,7 +15,7 @@
       "post" : {
         "tags" : [ "event" ],
         "summary" : "Post an event to the queue",
-        "description" : "- TUIRelationCreated\\: indicates a relation was created, the new relation is attached in the body1 \n- TUIRelationDeduplicated\\: indicates double relations were de-duplicated changed, the relation that is inactivated (merged into other relation) is attached in the body.\n- TUIRelationMerged\\: indicates two relations were merged (resulting from a de-duplication), the relation that survives and holds the merged data is attached in the body.\n- TUIRelationChanged\\: indicates changes were made in the relation, the new relation is attached in the body.\n- TUIRelationRetentionDelete\\: indicates a relation record is deleted because of retention policy, the reviewed relation is attached in the body.\n- TUIRelationPrivacyDelete\\: indicates a relation record is deleted because of privacy policy, the reviewed relation is attached in the body.\n- TUIRelationDeceasedDelete\\: indicates a relation record is deleted because of a recorded decease event, the reviewed relation is attached in the body.\n",
+        "description" : "- TUIRelationCreated\\: indicates a relation was created, the new relation is attached in the body1\n- TUIRelationDeduplicated\\: indicates double relations were de-duplicated changed, the relation that is inactivated (merged into other relation) is attached in the body.\n- TUIRelationMerged\\: indicates two relations were merged (resulting from a de-duplication), the relation that survives and holds the merged data is attached in the body.\n- TUIRelationChanged\\: indicates changes were made in the relation, the new relation is attached in the body.\n- TUIRelationRetentionDelete\\: indicates a relation record is deleted because of retention policy, the reviewed relation is attached in the body.\n- TUIRelationPrivacyDelete\\: indicates a relation record is deleted because of privacy policy, the reviewed relation is attached in the body.\n- TUIRelationDeceasedDelete\\: indicates a relation record is deleted because of a recorded decease event, the reviewed relation is attached in the body.\n",
         "requestBody" : {
           "description" : "the TUIRelationEvent object",
           "required" : true,
@@ -632,6 +632,11 @@
             "type" : "object",
             "description" : "Individual / Organization",
             "$ref" : "#/components/schemas/PartyType"
+          },
+          "exampleIndividualParty" : {
+            "type" : "object",
+            "description" : "Temp example to generate correct xml model",
+            "$ref" : "#/components/schemas/IndividualParty"
           }
         },
         "oneOf" : [ {
