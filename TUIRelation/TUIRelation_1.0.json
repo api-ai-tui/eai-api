@@ -653,7 +653,8 @@
         "required" : [ "lastname", "passport_lastname", "gender" ],
         "type" : "object",
         "xml" : {
-          "wrapped" : true
+          "wrapped" : true,
+          "name" : "individualParty"
         },
         "properties" : {
           "salutation" : {
