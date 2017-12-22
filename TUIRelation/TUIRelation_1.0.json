@@ -633,7 +633,7 @@
             "description" : "Individual / Organization",
             "$ref" : "#/components/schemas/PartyType"
           },
-          "exampleIndividualParty" : {
+          "IndividualParty" : {
             "type" : "object",
             "description" : "Temp example to generate correct xml model",
             "$ref" : "#/components/schemas/IndividualParty"
