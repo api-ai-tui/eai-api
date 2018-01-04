@@ -764,9 +764,18 @@
             "enum" : [ "Created", "Merged", "Deduplicated", "Updated", "PrivacyDelete", "RetentionDelete", "DeceasedDelete" ]
           },
           "changes" : {
-            "type" : "string",
-            "description" : "indicates what section of this relation were changed",
-            "enum" : [ "PartyDetailsChanged", "CapacityDetailsChanged", "ContactDetailsChanged" ]
+            "type" : "array",
+            "xml" : {
+              "wrapped" : true
+            },
+            "description" : "indicates what sections of this relation were changed",
+            "items" : {
+              "xml" : {
+                "name" : "change"
+              },
+              "type" : "string",
+              "enum" : [ "PartyDetailsChanged", "CapacityDetailsChanged", "ContactDetailsChanged" ]
+            }
           },
           "actionTS" : {
             "description" : "timestamp when this state change was recorded",
