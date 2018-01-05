@@ -11,7 +11,7 @@
   },
   "servers" : [ ],
   "paths" : {
-    "/v0.1/relations/events" : {
+    "/v1.0/relations/events" : {
       "post" : {
         "tags" : [ "event" ],
         "summary" : "Post an event to the queue",
@@ -791,6 +791,10 @@
           "changer_userCapacityID" : {
             "description" : "links to the capacity of the person who made the change",
             "type" : "string"
+          },
+          "relation" : {
+            "type" : "object",
+            "$ref" : "#/components/schemas/RelationID"
           }
         }
       }
