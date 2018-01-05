@@ -141,7 +141,10 @@
             "type" : "array",
             "items" : {
               "type" : "object",
-              "$ref" : "#/components/schemas/alternateID"
+              "$ref" : "#/components/schemas/alternateID",
+              "xml" : {
+                "wrapped" : true
+              }
             }
           },
           "stateLog" : {
@@ -602,7 +605,10 @@
       },
       "alternateID" : {
         "type" : "object",
-        "$ref" : "#/components/schemas/RelationID"
+        "$ref" : "#/components/schemas/RelationID",
+        "xml" : {
+          "wrapped" : true
+        }
       },
       "RelationID" : {
         "type" : "object",
@@ -616,6 +622,10 @@
             "type" : "string",
             "enum" : [ "C4C", "MDM", "TOR", "JUMPCRM" ]
           }
+        },
+        "xml" : {
+          "wrapped" : true,
+          "name" : "alternateID"
         }
       },
       "Party" : {
