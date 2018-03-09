@@ -27,15 +27,6 @@
             }
           }
         },
-        "parameters" : [ {
-          "in" : "query",
-          "name" : "eventType",
-          "description" : "Event that occurred",
-          "schema" : {
-            "type" : "string",
-            "enum" : [ "TUIRelationCreated", "TUIRelationDeduplicated", "TUIRelationMerged", "TUIRelationChanged", "TUIRelationRetentionDelete", "TUIRelationPrivacyDelete", "TUIRelationDeceasedDelete" ]
-          }
-        } ],
         "responses" : {
           "200" : {
             "description" : "OK"
