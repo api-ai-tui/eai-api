@@ -30,6 +30,12 @@
         "responses" : {
           "200" : {
             "description" : "OK"
+          },
+          "400" : {
+            "description" : "Event data validation error"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
           }
         }
       }
