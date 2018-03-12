@@ -71,7 +71,7 @@
           },
           "schemaVersion" : {
             "type" : "string",
-            "example" : "1.62",
+            "example" : "1.60",
             "xml" : {
               "attribute" : true
             }
@@ -85,7 +85,7 @@
       "TUIRelation" : {
         "type" : "object",
         "description" : "A TUIRelation holds information about the Identity and Capacity of individuals and organizations that TUI has relations with.",
-        "required" : [ "state", "lastChangeTS", "version", "masterID", "alternateIDs", "stateLog", "party", "contactPoints", "capacities" ],
+        "required" : [ "state", "relationID", "lastChangeTS", "version", "masterID", "alternateIDs", "stateLog", "party", "contactPoints", "capacities" ],
         "xml" : {
           "name" : "TUIRelation",
           "wrapped" : true
@@ -96,7 +96,7 @@
             "xml" : {
               "attribute" : true
             },
-            "example" : "1.62"
+            "example" : "1.6"
           },
           "state" : {
             "type" : "string",
@@ -312,7 +312,7 @@
             "type" : "string",
             "example" : "jits_01234576"
           },
-          "preferenceType" : {
+          "preferenceTypeCode" : {
             "type" : "string",
             "example" : "????"
           },
