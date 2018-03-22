@@ -185,11 +185,11 @@
         "properties" : {
           "capacityID" : {
             "type" : "string",
-            "example" : "jits_01234571"
+            "example" : "TOL_01234571"
           },
           "capacityTypeCode" : {
             "type" : "string",
-            "example" : "jits_01234572"
+            "example" : "TOL_01234572"
           },
           "linkedContactPoints" : {
             "type" : "string"
@@ -255,7 +255,7 @@
           },
           "ownerRelationID" : {
             "type" : "string",
-            "example" : "jits_01234575"
+            "example" : "TOL_01234575"
           }
         }
       },
@@ -269,7 +269,7 @@
         "properties" : {
           "consentID" : {
             "type" : "string",
-            "example" : "jits_01234574"
+            "example" : "TOL_01234574"
           },
           "consentType" : {
             "type" : "string",
@@ -291,7 +291,7 @@
           },
           "contactPointIDs" : {
             "type" : "string",
-            "example" : "jits_01234575"
+            "example" : "TOL_01234575"
           }
         }
       },
@@ -305,7 +305,7 @@
         "properties" : {
           "preferenceID" : {
             "type" : "string",
-            "example" : "jits_01234576"
+            "example" : "TOL_01234576"
           },
           "preferenceTypeCode" : {
             "type" : "string",
@@ -327,7 +327,7 @@
           },
           "contactPointIDs" : {
             "type" : "string",
-            "example" : "jits_01234575"
+            "example" : "TOL_01234575"
           }
         }
       },
@@ -342,7 +342,7 @@
           "noteID" : {
             "type" : "string",
             "description" : "unique ID for this note",
-            "example" : "jits_01234577"
+            "example" : "TOL_01234577"
           },
           "created" : {
             "type" : "string",
@@ -360,11 +360,11 @@
           },
           "author_unitPartyID" : {
             "type" : "string",
-            "example" : "jits_01234578"
+            "example" : "TOL_01234578"
           },
           "author_userCapacityID" : {
             "type" : "string",
-            "example" : "jits_01234579"
+            "example" : "TOL_01234579"
           }
         }
       },
@@ -387,7 +387,7 @@
                 },
                 "accountID" : {
                   "type" : "string",
-                  "example" : "jits_01234580"
+                  "example" : "TOL_01234580"
                 },
                 "name" : {
                   "type" : "string",
@@ -542,7 +542,7 @@
           "contactPointID" : {
             "type" : "string",
             "description" : "Unique ID of this contactpoint",
-            "example" : "jits_01234581"
+            "example" : "TOL_01234581"
           },
           "type" : {
             "type" : "string",
@@ -628,7 +628,7 @@
           "partyID" : {
             "type" : "string",
             "description" : "ID key for this party.",
-            "example" : "jits_01234585"
+            "example" : "TOL_01234585"
           },
           "partyType" : {
             "type" : "object",
@@ -659,7 +659,7 @@
           "name" : "individualParty"
         },
         "properties" : {
-          "salutation" : {
+          "salutationTypeCode" : {
             "type" : "string",
             "description" : "Salutation for this individual",
             "example" : "mr."
@@ -755,7 +755,7 @@
           "newVersion" : {
             "type" : "integer",
             "description" : "version number after this statechange",
-            "example" : 13
+            "example" : 33
           },
           "newState" : {
             "type" : "string",
@@ -767,13 +767,10 @@
           },
           "changes" : {
             "type" : "array",
-            "xml" : {
-              "wrapped" : true
-            },
             "description" : "indicates what sections of this relation were changed",
             "items" : {
               "xml" : {
-                "name" : "change"
+                "name" : "changes"
               },
               "type" : "string",
               "enum" : [ "PartyDetailsChanged", "CapacityDetailsChanged", "ContactDetailsChanged" ]
@@ -782,7 +779,7 @@
           "actionTS" : {
             "description" : "timestamp when this state change was recorded",
             "type" : "string",
-            "example" : "1996-12-19T16:39:57-08:00",
+            "example" : "2018-02-23T12:02:13.7933+01:00",
             "format" : "dateTime"
           },
           "changer_unitRelationID" : {
@@ -793,10 +790,6 @@
           "changer_userCapacityID" : {
             "description" : "links to the capacity of the person who made the change",
             "type" : "string"
-          },
-          "relation" : {
-            "type" : "object",
-            "$ref" : "#/components/schemas/RelationID"
           }
         }
       }
