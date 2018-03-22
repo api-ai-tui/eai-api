@@ -71,7 +71,7 @@
           },
           "schemaVersion" : {
             "type" : "string",
-            "example" : "1.60",
+            "example" : "1.62",
             "xml" : {
               "attribute" : true
             }
@@ -85,7 +85,7 @@
       "TUIRelation" : {
         "type" : "object",
         "description" : "A TUIRelation holds information about the Identity and Capacity of individuals and organizations that TUI has relations with.",
-        "required" : [ "state", "relationID", "lastChangeTS", "version", "masterID", "alternateIDs", "stateLog", "party", "contactPoints", "capacities" ],
+        "required" : [ "state", "lastChangeTS", "version", "masterID", "alternateIDs", "stateLog", "party", "contactPoints", "capacities" ],
         "xml" : {
           "name" : "TUIRelation",
           "wrapped" : true
@@ -96,25 +96,20 @@
             "xml" : {
               "attribute" : true
             },
-            "example" : "1.6"
+            "example" : "1.62"
           },
           "state" : {
             "type" : "string",
             "$ref" : "#/components/schemas/RelationState"
           },
-          "relationID" : {
-            "type" : "string",
-            "description" : "ID key for this relation.",
-            "example" : 122345456
-          },
           "lastChangeTS" : {
             "type" : "string",
             "format" : "dateTime",
-            "example" : "1996-12-19T16:39:57-08:00"
+            "example" : "2018-02-23T12:02:13.7912998+01:00"
           },
           "version" : {
             "type" : "integer",
-            "example" : 1,
+            "example" : 33,
             "description" : "Version number of this Reservation. Starts initially with 1"
           },
           "masterID" : {
@@ -126,11 +121,11 @@
             "properties" : {
               "relationID" : {
                 "type" : "string",
-                "example" : "jits_01234570"
+                "example" : "ID29"
               },
               "system" : {
                 "type" : "string",
-                "enum" : [ "C4C", "MDM", "TOR", "JUMPCRM" ]
+                "enum" : [ "TOR", "MDM", "C4C", "JUMPCRM" ]
               }
             }
           },
@@ -138,7 +133,7 @@
             "type" : "array",
             "items" : {
               "type" : "object",
-              "$ref" : "#/components/schemas/alternateID",
+              "$ref" : "#/components/schemas/alternateIDs",
               "xml" : {
                 "wrapped" : true
               }
@@ -600,7 +595,7 @@
         "example" : "Active",
         "enum" : [ "Active", "Inactive" ]
       },
-      "alternateID" : {
+      "alternateIDs" : {
         "type" : "object",
         "$ref" : "#/components/schemas/RelationID",
         "xml" : {
@@ -613,16 +608,16 @@
         "properties" : {
           "relationID" : {
             "type" : "string",
-            "example" : "jits_01234584"
+            "example" : "ID29"
           },
           "system" : {
             "type" : "string",
-            "enum" : [ "C4C", "MDM", "TOR", "JUMPCRM" ]
+            "enum" : [ "TOR", "MDM", "C4C", "JUMPCRM" ]
           }
         },
         "xml" : {
           "wrapped" : true,
-          "name" : "alternateID"
+          "name" : "alternateIDs"
         }
       },
       "Party" : {
