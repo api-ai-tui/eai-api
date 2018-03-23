@@ -9,6 +9,10 @@
       "email" : "productteamintegration@tui.nl"
     }
   },
+  "externalDocs" : {
+    "description" : "TUIRelationtionEvent_v0170.xsd",
+    "url" : "https://bitbucket.tui.nl/projects/ITARCS/repos/integration/browse/TO.RelationManagement/eventDefinitions/TUIRelationtionEvent_v0170.xsd"
+  },
   "servers" : [ ],
   "paths" : {
     "/v1.0/relations/events" : {
