@@ -148,15 +148,21 @@
             "$ref" : "#/components/schemas/Party"
           },
           "contactPoints" : {
+            "type" : "array",
             "xml" : {
-              "name" : "contactPoints",
               "wrapped" : true
             },
-            "type" : "array",
             "items" : {
               "type" : "object",
-              "anyOf" : null,
-              "$ref" : "#/components/schemas/AccountContactPoint"
+              "oneOf" : [ {
+                "$ref" : "#/components/schemas/PostalAddressContactPoint"
+              }, {
+                "$ref" : "#/components/schemas/EmailContactPoint"
+              }, {
+                "$ref" : "#/components/schemas/PhoneContactPoint"
+              }, {
+                "$ref" : "#/components/schemas/AccountContactPoint"
+              } ]
             }
           },
           "capacities" : {
