@@ -148,18 +148,15 @@
             "$ref" : "#/components/schemas/Party"
           },
           "contactPoints" : {
+            "xml" : {
+              "name" : "contactPoints",
+              "wrapped" : true
+            },
             "type" : "array",
             "items" : {
               "type" : "object",
-              "anyOf" : [ {
-                "$ref" : "#/components/schemas/PostalAddressContactPoint"
-              }, {
-                "$ref" : "#/components/schemas/EmailContactPoint"
-              }, {
-                "$ref" : "#/components/schemas/PhoneContactPoint"
-              }, {
-                "$ref" : "#/components/schemas/AccountContactPoint"
-              } ]
+              "anyOf" : null,
+              "$ref" : "#/components/schemas/PostalAddressContactPoint"
             }
           },
           "capacities" : {
@@ -471,11 +468,11 @@
               "type" : "object",
               "required" : [ "structureType" ],
               "properties" : {
-                "buildingnumber" : {
+                "buildingNumber" : {
                   "type" : "string",
                   "example" : 115
                 },
-                "buildingname" : {
+                "buildingName" : {
                   "type" : "string",
                   "example" : "Excelsior"
                 },
@@ -487,7 +484,7 @@
                   "type" : "string",
                   "example" : "lollerstreet"
                 },
-                "substreet" : {
+                "subStreet" : {
                   "type" : "string",
                   "example" : "????"
                 },
@@ -518,13 +515,15 @@
                 "unstructuredLine" : {
                   "type" : "array",
                   "items" : {
-                    "type" : "string",
-                    "example" : [ "addressed to Bob Sinclair", "Press hard because bell doesn't work properly" ]
-                  }
+                    "type" : "integer",
+                    "minimum" : 0,
+                    "maximum" : 1
+                  },
+                  "example" : [ "addressed to Bob Sinclair", "Test with more data", "Third floor" ]
                 },
                 "structureType" : {
                   "type" : "string",
-                  "example" : "????"
+                  "example" : "string"
                 }
               }
             }
@@ -546,7 +545,7 @@
           },
           "type" : {
             "type" : "string",
-            "enum" : [ "Email", "Phone", "PostalAddress", "Account" ]
+            "enum" : [ "PostalAddress", "Phone", "Email", "Account" ]
           },
           "category" : {
             "type" : "string",
