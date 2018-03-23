@@ -517,7 +517,7 @@
                   "items" : {
                     "type" : "integer",
                     "minimum" : 0,
-                    "maximum" : 1
+                    "maximum" : 7
                   },
                   "example" : [ "addressed to Bob Sinclair", "Test with more data", "Third floor" ]
                 },
