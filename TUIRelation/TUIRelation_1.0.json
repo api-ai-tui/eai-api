@@ -149,12 +149,9 @@
           },
           "contactPoints" : {
             "type" : "array",
-            "xml" : {
-              "wrapped" : true
-            },
             "items" : {
               "type" : "object",
-              "oneOf" : [ {
+              "anyOf" : [ {
                 "$ref" : "#/components/schemas/PostalAddressContactPoint"
               }, {
                 "$ref" : "#/components/schemas/EmailContactPoint"
